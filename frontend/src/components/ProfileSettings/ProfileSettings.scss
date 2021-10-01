@@ -1,0 +1,73 @@
+.profileSettings {
+    height: 100%;
+    display: flex;
+    padding: 20px 30px;
+    background-color: #F7F7F7;
+    main {
+        display: flex;
+        width: 100%;
+        margin: 0 8rem;
+    }
+}
+
+.profileSettings {
+    &__aside {
+        display: flex;
+        flex: 0.2;
+        &__nav {
+            display: flex;
+            flex-direction: column;
+            &__link {
+                padding: 5px 0;
+                padding-left: 15px;
+                display: flex;
+                flex-wrap: nowrap;
+                white-space: nowrap;
+                align-items: center;
+                font-size: 15px;
+                color: #7D7D7D;
+                margin: 5px 0;
+                position: relative;
+                img {
+                    padding-right: 5px;
+                    object-fit: contain;
+                    width: 30px;
+                }
+            }
+            &__link.active, &__link:hover {
+                &::after {
+                    position: absolute;
+                    content: '';
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 5px;
+                    background: #3E66FF;
+                    border-top-right-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                    opacity: .28;
+                }                
+                background: #EFEFEF;
+                border-radius: 7px;
+                color: black;
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .profileSettings {
+        main {
+            margin: 0 3rem;
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 800px) {
+    .profileSettings {
+        main {
+            margin: 0;
+        }
+    }
+}

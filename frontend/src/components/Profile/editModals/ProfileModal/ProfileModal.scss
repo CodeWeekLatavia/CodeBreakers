@@ -1,0 +1,353 @@
+@import "../../../../scss//variables.scss";
+
+.profileModal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #6161607a;
+    height: calc(100vh + 100px);
+    width: 100%;
+    display: grid;
+    place-items: center;
+    z-index: 1;
+    animation: slide .5s;
+    &__inner {
+        margin-top: 100px;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        max-width: 750px;
+        height: 900px;
+        width: 100%;
+        border-radius: 10px;
+        position: relative;
+
+        &__close {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            
+            img {
+                cursor: pointer;
+                width:30px;
+                padding:5px;
+                border-radius: 50%;
+                &:hover{
+                    background-color: #EBEBEB;
+                }
+            }
+        }
+        &__header {
+            text-align: center;
+            padding: 10px;
+            p {
+                font-family: "Hammersmith One",sans-serif;
+                font-size: 25px;
+            }
+        }
+        &__avatar-wrapper {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            display: flex;
+            padding: 0 50px;
+            img {
+                object-fit: contain;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+            }
+            label {
+                background:#3E66FF;
+                outline: none;
+                color: white;
+                font-family: "Hammersmith One",sans-serif;
+                max-width: 170px;
+                width: 100%;
+                font-size: 16px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: 30px;
+                cursor: pointer;
+                border-radius: 5px;
+                &:hover{
+                    background-color:$buttonBorder;
+                }
+            }
+        }
+        &__personal-information {
+            margin: 0px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto;
+            grid-gap: 30px;
+            padding: 0 50px;
+            &__input-group {
+                display: flex;
+                flex-direction: column;
+                max-width: 300px;
+                width: 100%;
+                position: relative;
+
+                label {
+                    font-family: "Hammersmith One",sans-serif;
+                    font-size: 17px;
+                    padding: 5px;
+                }
+                input {
+                    border-radius: 5px;
+                    border: 2px solid #EBEBEB;
+                    outline:none;
+                    font-family:'Roboto',sans-serif;
+                    font-weight:400;
+                    color:$secondaryColor;
+                    background-color:#FAFAFA !important;
+                    font-size: 15px;
+                    outline: none;
+                    width: 100%;
+                    height: 40px;
+                    padding: 0 10px;
+                }
+                &__custom-input {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    border: 2px solid #EBEBEB;
+                    border-radius: 5px;
+                    position: relative;
+                    background-color:#FAFAFA !important;
+                    img {
+                        cursor: pointer;
+                        object-fit: contain;
+                        width: 15px;
+                        margin-right: 10px;
+                    }
+                    input {
+                        border: none;
+                    }
+
+                    &__listopened,
+                    &__listclosed{
+                        position: absolute;
+                        top: 43px;
+                        list-style: none;
+                        background: rgb(240, 240, 240);
+                        width: 100%;
+                        z-index: 4;
+                        left: 0;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        justify-content: flex-start;
+                        transition: all 0.5s ease;
+                        overflow-y: scroll;
+                        border-radius: 5px;
+                        height: fit-content !important;
+
+                        li{
+                            width: 100%;
+                            padding-left: 10px;
+                            height: 40px;
+                            padding-bottom: 10px;
+                            padding: 10px 0 10px 10px;
+                            font-family: "Roboto",sans-serif;
+                            font-weight: 400;
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-start;
+                            cursor: pointer;
+                            background: rgb(240, 240, 240);
+                            border-radius: 5px;
+                            &:hover{
+                                background-color: lightgray;
+                            }
+                        }
+                    }
+
+                    &__listopened{
+                        opacity: 1;
+                        height: 200px;
+                    }
+
+                    &__listclosed{
+                        opacity: 0;
+                        height: 0;
+                    }
+                }
+
+                &__admbuttons{
+                    width: 200px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    button{
+                        width: 100px;
+                        height: 40px;
+                        margin-right: 20px;
+                        font-size: 16px;
+                        color: #fff;
+                        &:hover{
+                            background-color:$buttonBorder;
+                        }
+                    }
+
+                    &__active{
+                        background: $buttonBg;
+                        border: none;
+                    }
+
+                    &__notactive{
+                        background: $grayColor;
+                        border: none;
+                    }
+
+                    margin-bottom: 10px;
+                }
+
+                &__jobselection{
+                    width: 100%;
+                    height: 40px;
+                    color: #fff;
+                    background: $buttonBg;
+                }
+            }
+        }
+        &__desc {
+            display: flex;
+            flex-direction: column;
+            padding: 15px 50px;
+            padding-bottom: 50px;
+            
+            label {
+                font-size: 17px;
+                font-family: "Hammersmith One",sans-serif;
+                padding: 5px;
+            }
+
+            textarea {
+                max-width: 500px;
+                min-width: 300px;
+                border: 2px solid #EBEBEB;
+                border-radius: 5px;
+                resize: both;
+                max-height: 120px;
+                padding: 10px 10px 20px 10px;
+                font-family: 'Roboto',sans-serif;
+                font-weight: 400;
+                outline: none;
+                border-radius: 5px;
+                font-size: 16px;
+                letter-spacing: normal;
+            }
+
+        }
+        &__edit-options {
+            padding: 20px 45px 20px 45px;
+            border-top: .5px solid #a4a3a369;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            button {
+                max-width: 200px;
+                width: 100%;
+                height: 40px;
+                font-size: 17px;
+                text-align: center;
+                border:none !important;
+            }
+            button:first-child {
+                background-color:#E8E8E8;
+                color: #8A8A8A;
+                &:hover{
+                    background-color:#d3d3d3;
+                }
+            }
+            button:nth-child(2) {
+                background: #3E66FF;
+                color: white;
+                &:hover{
+                    background-color:$buttonBorder;
+                }
+            }
+        }
+    }
+}
+
+@keyframes slide {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 600px) {
+    .profileModal {
+        &__inner {
+            height: fit-content !important;
+            &__avatar-wrapper {
+                padding: 0 .5rem;
+            }
+            &__personal-information {
+                padding: .5rem;
+                &__input-group {
+                    max-width: 100%;
+                }
+            }
+            &__desc {
+                padding: 0 .5rem;
+                padding-bottom: 2rem;
+            }
+            &__edit-options{
+                button{
+                    width: 30vw;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 425px) {
+    .profileModal {
+        &__inner {
+            &__avatar-wrapper {
+                padding: 0 .5rem;
+            }
+            &__personal-information {
+                grid-template-columns: 1fr;
+                padding: .5rem;
+                &__input-group {
+                    max-width: 100%;
+                }
+            }
+            &__desc {
+                padding: 0 .5rem;
+                padding-bottom: 2rem;
+            }
+        }
+    }
+    .proffessionPopup {
+        margin-top: 2rem;
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        height: fit-content !important;
+        width: 100% !important;
+        max-height: fit-content !important;
+        &__header {
+            padding: auto !important;
+        }
+        ul {
+            display: flex;
+            flex-direction: column;
+            li {
+                margin: .2rem;
+            }
+        }
+    }
+}

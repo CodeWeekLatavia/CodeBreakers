@@ -1,0 +1,17 @@
+@import 'variables';
+
+button {
+    outline: none;
+    background: none;
+    border: 1px solid $buttonBorder; 
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+    font-family: 'Hammersmith One', sans-serif;
+}
+a {
+    text-decoration: none;
+}
+input {
+    background: #fff;
+}

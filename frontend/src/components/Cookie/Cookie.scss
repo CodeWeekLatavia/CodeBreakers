@@ -1,0 +1,74 @@
+.cookie {
+  background: white;
+  display: none;
+  flex-direction: column;
+  padding:  30px 30px;
+  border-radius: 15px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  max-width: 445px;
+  width: 100%;
+  height: 206px;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 100;
+  animation: fade-in 2s ease;
+  //animation-fill-mode: forwards;
+  &.active {
+    display: flex;
+  }
+  &__title {
+    margin-top:-10px;
+    font-family: 'Hammersmith One', sans-serif;
+    font-size: 21px;
+  }
+  &__info {
+    font-family: 'Manrope', sans-serif;
+    font-weight:400;
+    font-size: 14px;
+
+    u{
+      cursor: pointer;
+    }
+  }
+  &__options {
+    display: flex;
+    align-items: center;
+    button {
+      font-family: 'Hammersmith One', sans-serif;
+      border: none;
+      outline: none;
+      margin-top:20px;
+      font-size: 16px;
+      border-radius: 7px;
+      height: 38px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #accept-cookies {
+      margin-right: 15px;
+      width: 60%;
+      background: #3E66FF;
+      color: white;
+      img {
+        margin-right: 5px;
+      }
+    }
+    #decline-cookies {
+      width: 40%;
+      background: #E8E8E8;
+      color: #8A8A8A;
+    }
+  }
+}
+
+@keyframes fade-in {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}

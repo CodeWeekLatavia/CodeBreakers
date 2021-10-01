@@ -1,0 +1,40 @@
+@import '../../../scss/mixins.scss';
+
+.user {
+    display: flex;
+    cursor: pointer;
+    padding: .6rem 1.2rem !important;
+    margin: .3rem .5rem;
+    border-radius: 10px;
+    align-items: center;
+    img {
+        @include avatar;
+    }
+    &__info {
+        width: 100%;
+        padding-right: 1rem;
+        #username {
+            font-size: 16px;
+            span {
+                padding-left: .3rem;
+                color: #3EB2FF;
+            }
+        }
+        small {
+            font-size: 14px;
+            font-family: 'Manrope';
+            color: gray;
+        }
+    }
+    &:hover {
+        background-color: #e7e7e7;
+    }
+    button {
+        background-color: #3E66FF;
+        color: white;
+        border: none;
+        padding: .4rem;
+        height: fit-content;
+        white-space: nowrap;
+    }
+}

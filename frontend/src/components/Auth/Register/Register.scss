@@ -1,0 +1,141 @@
+@import '../../../scss/variables.scss';
+.register {
+    min-height: calc(100vh - 70px);
+    height: 100%;
+    position: relative;
+    margin-top: 70px;
+    &__header {
+        height: 130px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid #B8B8B8;
+        img {
+            position: relative;
+            top: 20px;
+            height: 120px;
+            object-fit: contain;
+        }
+    }
+    &__main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 50px;
+        &__left {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            font-family: 'Hammersmith One';
+            text-align: center;
+            &__title {
+                font-size: 3rem;                
+            }
+            &__undertitle {
+                margin-top: 10px;
+                font-size: 2rem;
+                font-family: 'Manrope';
+            }
+            a {
+                max-width: 493px;
+                width: 100%;
+                height: 129px;
+                margin-top: 50px;
+                display: flex;
+                justify-content: center;
+            }
+            button {
+                z-index:2;
+                max-width:400px;
+                width: 100%;
+                height: 100px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size:18px;
+                font-weight: 550;
+                border: 3px solid $buttonBorder;
+                img {
+                    z-index:2;
+                    margin-left: 15px;
+                    object-fit: contain;
+                    height: 20px;
+                }
+            }
+            #job-taker {
+                color: white;
+                background: $buttonBg;
+            }
+        }
+        &__right {
+            img {
+                max-width: 800px;
+                width: 100%;
+                height: 536px;
+            }
+        }
+    }
+    &__info {
+        position: absolute;
+        left: 50%;
+        transform:translate(-50%,-50%);
+        font-size: 15px;
+        bottom: 0;
+        color: #A7A6A6;
+        font-family:'Roboto',sans-serif;
+    }
+
+}
+@media (max-width: 1024px) {
+    .main{
+        margin-top: -70px !important;        
+    }
+}
+@media (max-width: 768px) {
+    .register {
+        &__main {
+            grid-template-columns: 1fr !important;
+            &__right {
+                display: none;
+            }
+        }
+    }
+}
+@media (max-width:710px){
+    .register {
+        &__main{
+            &__left {
+                &__title{
+                    //margin-top: 50px;
+                    font-size:40px;
+                }
+                &__undertitle{
+                    font-size: 20px;
+                }
+            }
+        }
+        &__info {
+            position: relative;
+            padding-top:50px;
+            text-align: center;
+        }
+    }
+}
+
+@media (max-width: 370px) {
+    .register {
+        &__main {
+           padding: 20px;
+        }
+    }
+}
+
+@media (max-height: 650px) {
+    .register {
+        &__info {
+            position: relative;
+            padding: 20px;
+            text-align: center;
+        }
+    }
+}

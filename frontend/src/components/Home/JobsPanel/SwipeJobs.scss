@@ -1,0 +1,118 @@
+.swipe-card {
+    width: 360px;
+    max-height: 450px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fff;
+
+    &__header {
+        width: 100%;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        border-bottom: 1px solid lightgray;
+        
+
+        img {
+            object-fit: cover;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        h3{
+            margin-left: 5px;
+            cursor: pointer;
+        }
+    }
+
+    &__body{
+        height: 290px;
+        width: 100%;
+    }
+
+    &__bottom {
+        display: flex;
+        justify-content: space-around;
+        height: 60px;
+        align-items: center;
+        border-top: 1px solid lightgray;
+
+        button {
+            border: none;
+            height: 2rem;
+            width: 2rem;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}
+
+.swipedCard{
+    &__right{
+        animation: yay 0.5s ease-out;
+    }
+    &__left{
+        animation: nope 0.5s ease-out;
+    }
+
+    @keyframes yay {
+        from {
+          transform: rotate(0deg);
+          opacity: 1;
+        }
+        to {
+          transform: rotate(40deg) translateY(-80px);
+          opacity: 0;
+          display: none;
+        }
+    }
+
+    @keyframes nope {
+        from {
+          transform: rotate(0deg);
+          opacity: 1;
+        }
+        to {
+          transform: rotate(-40deg) translateY(-80px);
+          opacity: 0;
+          display: none;
+        }
+    }
+}
+
+.swipeJobsCountainer{
+    width: 360px;
+    height: 100%;
+    max-height: 450px;
+    position: relative;
+    > * {
+        opacity: 0;
+    }
+    :last-child {
+        opacity: 1;
+    }
+}
+
+@media (max-height: 600px) {
+    .swipe-card {
+        &__body {
+            height: 200px;
+        }
+    }
+}
+
+@media (max-width: 425px) {
+    .swipeJobsCountainer {
+        width: 100%;
+    }
+    .swipe-card {
+        width: 100%;
+    }
+}

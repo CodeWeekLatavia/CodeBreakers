@@ -1,0 +1,8 @@
+<svg id="biscuit" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+    <g id="Group_39" data-name="Group 39" transform="translate(0 0)">
+        <circle id="Ellipse_155" data-name="Ellipse 155" cx="0.659" cy="0.659" r="0.659" transform="translate(5.245 3.242)" fill="#fff"/>
+        <circle id="Ellipse_156" data-name="Ellipse 156" cx="1.252" cy="1.252" r="1.252" transform="translate(13.124 8.201)" fill="#fff"/>
+        <circle id="Ellipse_157" data-name="Ellipse 157" cx="1.252" cy="1.252" r="1.252" transform="translate(4.059 11.64)" fill="#fff"/>
+        <path id="Path_370" data-name="Path 370" d="M17.284,5.476a3.492,3.492,0,0,1-4.76-4.76A8.9,8.9,0,0,0,9,0a9,9,0,1,0,9,9A8.9,8.9,0,0,0,17.284,5.476ZM2.228,8.243V7.188H3.282V8.243ZM5.31,15.2a2.306,2.306,0,1,1,2.306-2.306A2.309,2.309,0,0,1,5.31,15.2ZM5.9,5.614A1.713,1.713,0,1,1,7.617,3.9,1.715,1.715,0,0,1,5.9,5.614ZM9.527,9.527H8.473V8.473H9.527Zm2.243,6.23H10.716V14.7H11.77Zm2.606-4a2.306,2.306,0,1,1,2.306-2.306A2.309,2.309,0,0,1,14.376,11.759Z" transform="translate(0 0)" fill="#fff"/>
+    </g>
+</svg>

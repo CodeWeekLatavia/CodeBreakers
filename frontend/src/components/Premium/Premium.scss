@@ -1,0 +1,184 @@
+@import "../../scss/variables.scss";
+
+.premium{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 100px 0;
+    //margin-top: 70px;
+    &__header{
+        width: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 700px;
+
+        &__option,
+        &__optionActive{
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-bottom: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            img{
+                height: 30px;
+                width: 30px;
+            }
+
+            h3{
+                font-size: 26px;
+                font-family: 'Hammersmith One', sans-serif;
+                margin-left: 10px;
+            }
+        }
+
+        &__option{
+            border-bottom: 3px #fff solid;
+            opacity: 0.7;
+        }
+
+        &__optionActive{
+            border-bottom: 3px #3E66FF solid;
+        }
+    }
+
+    &__body{
+        margin-top: 50px;
+        width: 90%;
+        max-width: 700px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
+
+        &__top{
+            width: 100%;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+
+            p{
+                font-family: 'Manrope',sans-serif;
+                font-size: 18px;
+                color: #000;
+                &:last-child{
+                    margin-bottom:10px;
+                }
+            }
+        }
+
+        &__bottom{
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            &__reasons{
+                list-style: none;
+
+                li{
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    margin-bottom: 15px;
+                    //font-family: 'Hammersmith One', sans-serif;
+                    font-size: 20px;
+                    font-weight: 100;
+
+                    img{
+                        width: 40px;
+                        height: 40px;
+                    }
+
+                    h4{
+                        margin-left: 20px;
+                        font-size: 16px;
+                    }
+                }
+
+                button{
+                    width: 100%;
+                    height: 40px;
+                    background: $buttonBg;
+                    color: #fff;
+                    margin-top: 40px;
+                }
+            }
+
+            &__imageContainer{
+                img{
+                    width: 350px;
+                }
+            }
+        }
+    }
+}
+@media (min-width: 1024px){
+    .premium{
+        margin-top: 70px;
+    }
+}
+
+@media (max-width: 768px) {
+    .premium {
+        &__body {
+            &__bottom {
+                justify-content: center;
+                &__reasons {
+                    width: 70%;
+                }
+                &__imageContainer {
+                    img {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-height: 768px) {
+    .premium {
+        padding: 3rem 0;
+    }
+}
+
+@media (max-width: 500px) {
+    .premium {
+        &__header{
+            &__option,
+            &__optionActive{
+                h3{
+                    font-size: 20px;
+                }
+            }
+        }
+        &__body {
+            &__bottom {
+                &__reasons {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 415px) {
+    .premium {
+        &__header{
+            &__option,
+            &__optionActive{
+                h3{
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}
+

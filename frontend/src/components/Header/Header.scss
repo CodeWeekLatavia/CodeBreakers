@@ -1,0 +1,284 @@
+@import '../../scss/variables.scss';
+
+#header__right {
+    display: flex;
+    align-items: center;
+}
+
+.header {
+    position: fixed;
+    top:0;
+    background-color: #FBFBFB;
+    display: flex;
+    align-items: center;
+    height: 70px;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 35px;
+    box-shadow: 0px 0px 1px 1px #B8B8B8;
+    z-index:10;
+    
+    
+    &__logo {
+        display: flex;
+        object-fit: contain;
+        min-width: 150px;
+        max-width: 150px;
+        width: 100%;
+        margin: 0 150px;
+        padding-top:20px;
+        cursor: pointer;
+    }
+
+    &__links {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        font-size: 1.2rem;
+        font-family: 'Hammersmith One', sans-serif;
+        &__link {
+            margin: 0 40px;
+            color: $secondaryColor;
+            cursor: pointer;
+            white-space: nowrap;
+            &:hover{ 
+                color: $buttonBg;
+            }
+        }
+         #premium {
+            display: flex;
+            align-items: center;
+            #crown {
+                position:relative;
+                object-fit: contain;
+                width: 23px;
+                margin:-3px 10px 5px 0;
+
+            }
+        }
+
+    }
+
+    &__languages{
+        display: flex;
+        align-items: center;
+        margin-right: 40px;
+        position: relative;
+        width: 12px;
+        font-family: 'Hammersmith One', sans-serif;
+        color:$grayColor;
+        font-size:18px;
+        &__options {
+            position: absolute;
+            height: fit-content;
+            top: 30px;
+            right: -25px;
+            overflow: hidden;
+            height: 0%;
+            background: whitesmoke;
+            transition: all .5s;
+            padding: 0 10px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            margin-top: 25px;
+            &.active {
+                height: calc(100% + 20px * 3);
+                background-color:white;
+                border-radius:5px;
+                z-index: 1;
+            }
+
+            &__option {
+                li {
+                    object-fit: contain;
+                    width: 20px;
+                    cursor: pointer;
+                    transition: all .15s;
+                    list-style: none;
+                    &:hover {
+                        background-color:#EBEBEB;
+                    }
+                }
+            }
+        }
+
+        &__language-expander {
+            display: flex;
+            cursor: pointer;
+            width: 100px;
+            color: $secondaryColor;
+            transition: all .2s;
+            border-radius:5px;
+            color:$grayColor;
+            img {
+                height: 20px;
+                margin-right: 10px;
+            }
+            i {
+                &.active {
+                    transform: rotate(180deg);
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+
+    &__auth-options{
+        display: flex;
+        align-items: center;
+        padding-right:2rem;
+        &__register { 
+            font-size: 1.2rem;
+            font-family: 'Hammersmith One', sans-serif;
+            border: 0px;
+            margin-right: 10px;
+            color: $secondaryColor;
+            &:hover {
+                color: $mainColor;
+            }
+        }
+        &__login {
+            font-family: 'Hammersmith One', sans-serif;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            padding: 5px 40px;
+            color: $buttonBg;
+            font-weight: 550;
+            transition: all .25s;
+            border:2px solid $buttonBorder;
+            &:hover {
+                background: $buttonBg;
+                color: white;
+                box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            }
+        }
+    }
+    
+}
+// responsive header styling
+
+@media (max-width: 1400px) {
+    .header {
+        position: fixed;
+        top:0;
+        &__logo {
+            margin: 0;
+        }
+        &__links {
+            &__link {
+                margin: 0 20px;
+            }
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .header {
+        position: fixed;
+        top:0;
+
+        &__hamburger {
+            display: inline-block;
+            cursor: pointer;
+
+              .bar1, .bar2, .bar3 {
+                width: 30px;
+                height: 4px;
+                background-color: #333;
+                margin: 6px 0;
+                transition: 0.4s;
+                border-radius:200px;
+              }
+              &.active {
+                .bar1 {
+                    -webkit-transform: rotate(-45deg) translate(-7px, 6px);
+                    transform: rotate(-45deg) translate(-7px, 6px);
+                }
+                .bar2 {opacity: 0;}
+                .bar3 {
+                    -webkit-transform: rotate(45deg) translate(-8px, -7px);
+                    transform: rotate(45deg) translate(-8px, -7px);
+                }
+            }
+        }
+        &__links {
+            z-index: 1;
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            transform: scaleY(0);
+            transform-origin: top;
+            overflow: hidden;
+            flex-direction: column;
+            border-radius: 0 0 15px 15px;
+            border-top:2px solid #B8B8B8;
+            box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -5px;
+            background: white;
+            transition: all .4s;
+            > * {
+                padding: 1rem;
+            }
+            &.active {
+                transform: scaleY(1);
+            }
+            &__link {
+                display: flex;
+                justify-content: center;
+                margin: 0 ;
+                transition: all .25s;
+                &:hover {
+                    background: rgba(209, 209, 209, 1);
+                }
+            }
+            #header__right {
+                flex-direction: column;
+                .header__languages {
+                    align-items: center;
+                    width: 100%;
+                    box-sizing: border-box;
+                    -moz-box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                    &__options {
+                        position: relative;
+                        display: flex;
+                        justify-content: center;
+                        top: 0;
+                        margin: 0;
+                        width: 100%;
+                        background-color: transparent;
+                        &__option {
+                            margin: 0 5px;
+                            li {
+                                padding: 1rem;
+                                width: fit-content;
+                            }
+                        }
+                    }
+                }
+                .header__auth-options {
+                    flex-direction: column;
+                    padding: 0;
+                    margin: 1rem 0;
+                    width: 100%;
+                    button {
+                        margin: 1rem 0;
+                    }
+                    a {
+                        text-align: center;
+                        width: 100%;
+                        margin: 5px 0;
+                    }
+                    &__register {
+                        margin: 0;
+                    }
+                    &__login {
+                        padding: 10px;
+                        width: 50%;
+                    }
+                }
+            }
+        }
+    }
+}

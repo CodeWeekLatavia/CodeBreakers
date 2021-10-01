@@ -1,0 +1,99 @@
+.inputs {
+    &__text-input,
+    &__dropdown-input,
+    &__checkbox-input {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 10px 0;
+        &__name {
+            max-width: 213px;
+            width: 100%;
+            font-size: 16px;
+        }
+        &__input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 2px solid #EBEBEB;
+            padding: 5px;
+            max-width: 500px;
+            width: 100%;
+            height: 30px;
+            color: #7D7D7D;
+            font-size: 15px;
+            input {
+                outline: none;
+                border: none;
+                width: 100%;
+                color: #7D7D7D;
+                &:focus {
+                    color: black;
+                }
+            }
+            p {
+                display: flex;
+                flex: 1;
+                align-items: center;
+                img {
+                    padding-right: 5px;
+                    object-fit: contain;
+                    width: 25px;
+                    cursor: default;
+                }
+            }
+            img {
+                object-fit: contain;
+                width: 14px;
+                cursor: pointer;
+                transition: all .2s;
+            }
+            img.active {
+                transform: rotate(180deg);
+            }
+        }
+    }
+    &__dropdown-input {
+        &__input-group {
+            cursor: pointer;
+            &__dropdown {
+                position: absolute;
+                background-color: #EBEBEB;
+                width: 100%;
+                top: 30px;
+                left: 0;
+                z-index: 1;
+                display: none;
+                p {
+                    padding: .5rem;
+                    &:hover {
+                        color: #3E66FF;
+                    }
+                }
+                &.active {
+                    display: initial;
+                }
+            }
+        }
+    }
+    &__checkbox-input {
+        input[type=checkbox] {
+            cursor: pointer;
+        }
+    }
+}
+
+@media (max-width: 425px) {
+    .inputs {
+        &__text-input,
+        &__dropdown-input {
+            flex-direction: column;
+            align-items: flex-start;
+            label {
+                padding-bottom: .3rem;
+            }
+        }
+    }
+}

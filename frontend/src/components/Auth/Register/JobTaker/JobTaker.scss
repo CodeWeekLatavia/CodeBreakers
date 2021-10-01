@@ -1,0 +1,284 @@
+@import '../../../../scss/variables.scss';
+
+.main{
+    height: calc(100vh - 70px);
+    background-color:#F7F7F7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    .job{
+        background-color:#fff;
+        padding:15px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+        max-height: 800px;
+        max-width: 1110px;
+        height: fit-content;
+        width: 100%;
+        border-radius: 10px;
+        display:flex;
+        &__left{
+            max-width: 555px;
+            width: 100%;
+            text-align: center;
+
+            &__title{
+                font-family: 'Hammersmith One',sans-serif;
+                font-size: 2rem;
+                color: $secondaryColor;
+                margin-top: 30px;
+            }
+            &__desc{
+                font-family: 'Manrope',sans-serif;
+                margin-top: 10px;
+                font-size: 1.2rem;
+            }
+            img{
+                margin-top: 30px;
+                max-width:400px;
+            }
+            &__login{
+                margin: 70px 0px 10px 0px;
+                display: flex;
+                align-items: center;
+                justify-content:center;
+                font-family: 'Manrope',sans-serif;
+                font-size:16px;
+                a {
+                    padding-left: 5px;
+                    color: $buttonBg;
+                    font-weight:900;
+                    &:hover{
+                        text-decoration: underline;
+                    }
+                }
+        }
+        }
+        &__right{
+            max-width:555px;
+            width: 100%;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            margin-top:100px;
+            height: fit-content;
+            &__input-group{
+                position: relative;
+                width: 25rem;
+                height: 3rem;
+                margin-bottom:30px;
+                label{
+                    position: absolute;
+                    left: 1rem;
+                    top: 1.2rem;
+                    padding: 0 0.5rem;
+                    color: #7D7D7D;
+                    font-family:'Roboto',sans-serif;
+                    font-weight:500;
+                    cursor: text;
+                    transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
+                }
+                &__eye{
+                    position: absolute;
+                    top: 45%;
+                    right: 5%;
+                    cursor: pointer; 
+                }
+                &__input{
+                    margin: 0 auto;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    height: 45px;
+                    border-radius: 5px;
+                    border:1px solid #E5E5E5;
+                    outline:none;
+                    font-family:'Roboto',sans-serif;
+                    font-weight:500;
+                    color:$secondaryColor;
+                    background-color:#FAFAFA !important;
+                    font-size:16px;
+                    padding: 1.9rem 2.3rem 1.5rem 1.5rem;
+                    &:hover {
+                        border-color: $buttonBg;
+                      }
+                      &:focus {
+                        border-color: $buttonBg;
+                      }
+                }
+            }
+            .job__right__input-group__input:focus ~ .job__right__input-group__label,
+            .job__right__input-group__input:not(:placeholder-shown).job__right__input-group__input:not(:focus) ~ .job__right__input-group__label {
+                top: 0.5rem;
+                font-size: 12px;
+                left: 0.1rem;
+                color: $buttonBg;
+            }
+            &__error{
+                font-size:14px;
+                text-align:left;
+                width:100%;
+                margin:-15px 0 10px 150px;
+                font-family: 'Hammersmith One',sans-serif;
+            }
+            
+            &__submit{
+                width: 100%;
+                color: white;
+                font-size: 20px;
+                font-family: 'Hammersmith One',sans-serif;
+                background-color:$buttonBg;
+                border:2px solid $buttonBorder;
+                border-radius: 5px;
+                width: 280px;
+                height: 50px;
+                margin-top: 30px;
+                &:hover {
+                    background: $buttonBorder;
+                }
+            }
+            &__checkbox{
+                position: relative;
+                width: 25rem;
+                height: 3rem;
+                display:flex;
+                input{
+                    appearance: none;
+                    height:20px;
+                    width: 20px;
+                    background-color: #d5d5d5;
+                    border-radius: 3px;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    outline: none;
+                    margin-right: 10px;
+                    &:hover{
+                        background-color: #A5A5A5;
+                    }
+                    &:checked{
+                        background-color:$buttonBg;
+                        content: url("../../../../assets/svg/checking.svg");
+                        width: 20px;
+                        height: 20px;
+                        &::after{
+                            display: block;
+                        }
+                    }
+                    u{
+                        cursor: pointer;
+                    }
+                }
+                label{
+                    font-size:14px;
+                    font-family: "Manrope",sans-serif;
+                    cursor: pointer;
+                }
+            }
+            &__divider {
+                width: 100%;
+                height: 0.5px;
+                background: #A6A8B5;
+                margin: 50px 0 30px 0;
+                position: relative;
+                &::after {
+                    position: absolute;
+                    content: "Vai reģistrējies ar";
+                    left: 50%;
+                    top: -13px;
+                    background: white;
+                    color:#A6A8B5;
+                    padding: 0 10px;
+                    font-size: 15px;
+                    font-family: 'Manrope',sans-serif;
+                    transform: translateX(-50%);
+                }
+            }  
+        }
+
+
+    }
+}
+
+@media (max-width: 1024px) {
+    .main {
+        height: fit-content !important;
+        .job {
+            flex-direction: column;
+            align-items: center;
+            margin-top: 70px;
+            &__left {
+                img {
+                    display: none;
+                }
+                &__login {
+                    display:none;
+                }
+                &__title{
+                    margin-top: 50px;
+                }
+            }
+            &__right {
+                margin-top: 20px;
+                &__submit{
+                    margin-top: 10px;
+                }
+                &__divider{
+                    margin-top: 40px;
+                }
+            }
+        }
+        .login{
+            margin: 20px 0px 10px 0px;
+            display: flex;
+            align-items: center;
+            justify-content:center;
+            font-family: 'Manrope',sans-serif;
+            font-size:14px;
+            a {
+                padding-left: 5px;
+                color: $buttonBg;
+                font-weight:900;
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-height: 800px) {
+    .main {
+        height: fit-content !important;
+    }
+}
+
+
+@media (max-width: 540px) {
+    .main {
+        padding: 0 !important;
+    }
+}
+
+@media (max-width: 425px) {
+    .main {
+        .job {
+            &__right {
+                &__input-group {
+                    width: 95vw;
+                }
+                &__submit{
+                    font-size: 18px;
+                    height: 44px;
+                    width: 85vw;
+                }
+                &__checkbox {
+                    margin: auto;
+                }
+            }
+        }
+    }
+}

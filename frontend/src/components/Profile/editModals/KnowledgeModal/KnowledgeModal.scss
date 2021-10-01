@@ -1,0 +1,54 @@
+.knowledgeModal{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #6161607a;
+    height: calc(100vh + 70px);
+    width: 100%;
+    display: grid;
+    place-items: center;
+    z-index: 1;
+    animation: slide .5s;
+    &__inner {
+        position: relative;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        max-width: 800px;
+        height: fit-content;
+        width: 100%;
+        border-radius: 25px;
+        &__close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            img {
+                cursor: pointer;
+            }
+        }
+        &__header {
+            border-bottom: .5px solid #a4a3a386;
+            text-align: center;
+            padding: 10px;
+            p {
+                font-size: 25px;
+            }
+        }
+        &__desc {
+            padding: 50px 0;
+            label {
+                padding: 10px;
+                display: flex;
+            }
+            textarea {
+                width: 50%;
+                height: 140px;
+                max-height: 150px;
+                resize: vertical;
+                border: 2px solid #EBEBEB;
+                padding: 10px;
+            }
+        }
+    }
+}
