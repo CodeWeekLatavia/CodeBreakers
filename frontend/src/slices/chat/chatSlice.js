@@ -32,7 +32,7 @@ export const chatSlice = createSlice({
                 }
 
                 return m;
-            });
+            }); 
         },
         setOnlineUsers: (state, action) => {
             state.onlineUsers = action.payload;

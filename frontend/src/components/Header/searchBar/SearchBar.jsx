@@ -5,12 +5,15 @@ import CloseIcon from "../../../assets/svg/close.svg";
 import CompanyIcon from "../../../assets/svg/company.svg";
 import Avatar from "../../../assets/svg/avatar.svg";
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { languageData } from '../../../slices/languages/languageSlice';
 
 function SearchBar() {
     const [search, setSearch] = useState("");
     const [searched, setSearched] = useState(false);
     const [results, setResults] = useState([]);
 
+    const languageInfo = useSelector(languageData);
     const history = useHistory();
 
     useEffect(() => {
@@ -34,9 +37,9 @@ function SearchBar() {
             <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Cilvēki, kompānijas..."
+                placeholder={languageInfo.text.authorizedHeader.searchPlaceholder}
             />
-            <button type="submit" onClick={(e) => {setResults([]);searchDB(e)}}>Meklēt</button>
+            <button type="submit" onClick={(e) => {setResults([]);searchDB(e)}}>{languageInfo.text.authorizedHeader.searchBtn}</button>
 
             {searched && (
                 <div className="header__search__results">

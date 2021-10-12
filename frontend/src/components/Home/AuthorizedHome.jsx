@@ -13,6 +13,7 @@ import { useHistory } from 'react-router-dom';
 import { getUserJobNoSearch } from '../../logic/user/proffessions/proffessions';
 import { useDispatch } from 'react-redux';
 import { proffessionData } from '../../slices/proffessions/proffessionSlice';
+import { languageData } from '../../slices/languages/languageSlice';
 
 import LoadingPopup from '../popups/loading/LoadingPopup';
 import ScrollJobs from './JobsPanel/ScrollJobs';
@@ -25,6 +26,7 @@ import SwipedUser from './swipedUser/SwipedUser';
 function AuthorizedHome() {
     const pageInfo = useSelector(infoData);
     const userInfo = useSelector(userData);
+    const languageInfo = useSelector(languageData);
 
     const [scrollJobs, setScrollJobs] = useState([]);
     const [swipeJobs, setSwipeJobs] = useState([]);
@@ -141,7 +143,7 @@ function AuthorizedHome() {
                                 <h2>
                                     {userInfo.info.is_employer ?
                                         userInfo.info.profile.company_name :
-                                        <>{userInfo.info.first_name} {userInfo.info.last_name} {userInfo.info.profile.is_active_jobseeker && <span>#ADM</span>}</>
+                                        <>{userInfo.info.first_name} {userInfo.info.last_name} {userInfo.info.profile.is_active_jobseeker && <span>{languageInfo.text.authorizedHomePage.adm}</span>}</>
                                     }
                                 </h2>
                                 {userInfo.info.profile.user_proffession_category && userInfo.info.profile.user_proffession ? (
@@ -153,16 +155,16 @@ function AuthorizedHome() {
                         </div>
                         {userInfo.info.has_premium && (
                             <div className="auth-home__left__premium">
-                                <p><img src={CrownIcon} alt="crown"></img>Premium (aktīvs)</p>
+                                <p><img src={CrownIcon} alt="crown"></img>{languageInfo.text.authorizedHomePage.leftPanel.premium}</p>
                             </div>
                         )}
                         <div className="auth-home__left__contacts">
-                            <h3>Kontakti</h3>
-                            <p>Atrodiet savus kontaktus, lai ar viņiem tērzētu</p>
+                            <h3>{languageInfo.text.authorizedHomePage.leftPanel.contacts}</h3>
+                            <p>{languageInfo.text.authorizedHomePage.leftPanel.findContacts}</p>
                         </div>
                         {!userInfo.info.is_employer &&
                             <div className="auth-home__left__saved">
-                                <p onClick={() => history.push('/saved')}><img src={Bookmark2} alt="bookmark" /> Saglabātie</p>
+                                <p onClick={() => history.push('/saved')}><img src={Bookmark2} alt="bookmark" /> {languageInfo.text.authorizedHomePage.leftPanel.saved}</p>
                             </div>
                         }
                     </div>
@@ -173,7 +175,7 @@ function AuthorizedHome() {
                         <>
                             {userInfo.swipedPossitions && userInfo.swipedPossitions.length > 0 ? (
                                 <>
-                                    <h2>Lietotāji</h2>
+                                    <h2>{languageInfo.text.authorizedHomePage.users}</h2>
                                     <div className="auth-home__middle__users panel">
                                         {userInfo.swipedPossitions.map((possition, i) => {
                                             return(
@@ -199,19 +201,19 @@ function AuthorizedHome() {
                                     <div onClick={() => {
                                         setActiveJobOption('long term');
                                     }} className={`auth-home__middle__job-options__job-option ${activeJobOption === 'long term' ? 'active' : ''}`}>
-                                        <h3>Ilgtermiņa <span>darbi</span></h3>
+                                        <h3>{languageInfo.text.authorizedHomePage.longtermJobs} <span>{languageInfo.text.authorizedHomePage.job}</span></h3>
                                         <div className="active-line"></div>
                                     </div>
                                     <div onClick={() => {
                                         setActiveJobOption('short term');
                                     }} className={`auth-home__middle__job-options__job-option ${activeJobOption === 'short term' ? 'active' : ''}`}>
-                                        <h3>Īstermiņa <span>darbi</span></h3>
+                                        <h3>{languageInfo.text.authorizedHomePage.shorttermJobs} <span>{languageInfo.text.authorizedHomePage.job}</span></h3>
                                         <div className="active-line"></div>
                                     </div>
                                     <div onClick={() => {
                                         setActiveJobOption('woluntary job');
                                     }} className={`auth-home__middle__job-options__job-option ${activeJobOption === 'woluntary job' ? 'active' : ''}`}>
-                                        <h3>Brīvprātīgie <span>darbi</span></h3>
+                                        <h3>{languageInfo.text.authorizedHomePage.voluntaryJobs} <span>{languageInfo.text.authorizedHomePage.job}</span></h3>
                                         <div className="active-line"></div>
                                     </div>
                                 </div>
@@ -240,7 +242,7 @@ function AuthorizedHome() {
                 <div className="auth-home__right">
                     {chatInfo.chats && chatInfo.chats.length > 0 && (
                         <>
-                            <h2>Čats</h2>
+                            <h2>{languageInfo.text.authorizedHomePage.Right.chat}</h2>
                             <div className="auth-home__right__chat panel">
                                 {chatInfo.chats.map((contact, i) =>
                                     <Contact 

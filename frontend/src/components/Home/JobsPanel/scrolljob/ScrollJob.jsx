@@ -10,6 +10,8 @@ import EditJobsModal from '../../EditJobsModal/EditJobsModal';
 import { jobSeekerAcceptJobOffer } from '../../../../logic/jobOffers/swipe';
 import { useDispatch } from 'react-redux';
 import {getPossitionProffession} from "../../../../logic/user/proffessions/proffessions"
+import { languageData } from '../../../../slices/languages/languageSlice';
+import relativeTime from '../../../RelativeTime/RelativeRime';
 
 function ScrollJob({ jobOffer }) {
     const [companyInfo, setCompanyInfo] = useState(null);
@@ -17,6 +19,7 @@ function ScrollJob({ jobOffer }) {
     const [possitionProffession, setPossitionProffession] = useState(null);
 
     const userInfo = useSelector(userData);
+    const languageInfo = useSelector(languageData);
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -36,28 +39,6 @@ function ScrollJob({ jobOffer }) {
     useEffect(() => {
 
     }, [jobOffer.post_time])
-
-    const relativeTime = (postTime) => {
-        const rtf = new Intl.RelativeTimeFormat('lv', {
-            localeMatcher: 'best fit',
-            numeric: 'auto',
-            style: 'long'
-        });
-        const diff = new Date(postTime) - new Date();
-        const units = {
-            year  : 24 * 60 * 60 * 1000 * 365,
-            month : 24 * 60 * 60 * 1000 * 365/12,
-            day   : 24 * 60 * 60 * 1000,
-            hour  : 60 * 60 * 1000,
-            minute: 60 * 1000,
-            second: 1000
-        }
-        for (const unit in  units) {
-            if (Math.abs(diff) > units[unit] || unit === 'seconds') {
-                return rtf.format(Math.round(diff/units[unit]), unit)
-            }
-        }
-    }
 
     const Location = ({ icon, iconAlt, title, value }) => {
         return (
@@ -81,14 +62,14 @@ function ScrollJob({ jobOffer }) {
                     <img src={companyInfo.logo} alt="logo" className="logo" onClick={() => history.push(`/profile/${companyInfo.user}`)} />
                     <div className="info">
                         <h4 onClick={() => history.push(`/profile/${companyInfo.user}`)} >{companyInfo.company_name}</h4>
-                        <small>{relativeTime(jobOffer.post_time)}</small>
+                        <small>{relativeTime(jobOffer.post_time, languageInfo.langShort)}</small>
                     </div>
                     {userInfo.info.id === companyInfo.user && (
                         <img src={Pen} alt="options" className="options" onClick={() => setEditing(!editing)} />
                     )}
                 </div>
-                <Location icon={Marker} iconAlt="marker" title="Atrašanās vieta"
-                    value={(!jobOffer.position_city && !jobOffer.position_country) ? 'Nezināma' : 
+                <Location icon={Marker} iconAlt="marker" title={languageInfo.text.jobOffer.location}
+                    value={(!jobOffer.position_city && !jobOffer.position_country) ? languageInfo.text.jobOffer.locationUnknown : 
                     <>
                         {(jobOffer.position_country && jobOffer.position_city) ? `${jobOffer.position_country}, ${jobOffer.position_city}` :
                         <>
@@ -97,28 +78,28 @@ function ScrollJob({ jobOffer }) {
                         </>}
                     </>}
                 />
-                <Location icon={Suitcase} iconAlt="suitcase" title="Profesija" value={possitionProffession}/>
+                <Location icon={Suitcase} iconAlt="suitcase" title={languageInfo.text.jobOffer.proffession} value={possitionProffession}/>
                 {jobOffer.photo && (
                     <div>
                         <img src={jobOffer.photo} alt="jobOffer" className="job-panel__photo" />
                     </div>
                 )}
                 <div className="job-panel__requirements">
-                    <p className="job-panel__requirements__title">Prasmes un pienākumi</p>
+                    <p className="job-panel__requirements__title">{languageInfo.text.jobOffer.responsabilities}</p>
                     <p>{jobOffer.position_info}</p>
                 </div>
                 <div className="job-panel__info">
-                    <p className="job-panel__info__title">Kompānija piedāvā</p>
+                    <p className="job-panel__info__title">{languageInfo.text.jobOffer.companyOffers}</p>
                     <p>{jobOffer.position_requirements}</p>
                 </div>
                 <div className="job-panel__bottom">
                     {!userInfo.info.is_employer &&
-                        <button className="job-panel__bottom__sign-up" onClick={() => jobSeekerAcceptJobOffer(1, jobOffer.id, userInfo.accessToken, dispatch)}>Pieteikties</button>
+                        <button className="job-panel__bottom__sign-up" onClick={() => jobSeekerAcceptJobOffer(1, jobOffer.id, userInfo.accessToken, dispatch)}>{languageInfo.text.jobOffer.signUp}</button>
                     }
                     {jobOffer.price_range !== "00.00" && (
                         <div className="job-panel__bottom__price-wrapper">
-                            <small>SĀKOT NO</small>
-                            <h2>€ {jobOffer.price_range}/mēnesī</h2>
+                            <small>{languageInfo.text.jobOffer.salaryBeginningFrom}</small>
+                            <h2>€ {jobOffer.price_range}/{languageInfo.text.jobOffer.salaryPerMonth}</h2>
                         </div>
                     )}
                 </div>

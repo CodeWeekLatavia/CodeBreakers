@@ -13,11 +13,13 @@ import ProffessionPopup from '../../../popups/proffessions/ProffessionPopup';
 import { getUserJobNoSearch } from '../../../../logic/user/proffessions/proffessions';
 import { proffessionData } from '../../../../slices/proffessions/proffessionSlice';
 import { updateCompanyInfo } from '../../../../logic/company/info/companyInfo';
+import { languageData } from '../../../../slices/languages/languageSlice';
 
 function ProfileModal({handleProfileModal}){
     const userInfo = useSelector(userData);
     const locationInfo = useSelector(locationData);
     const proffessionInfo = useSelector(proffessionData);
+    const languageInfo = useSelector(languageData);
 
     const [name, setName] = useState(userInfo.info.first_name);
     const [surname, setSurName] = useState(userInfo.info.last_name);
@@ -140,7 +142,7 @@ function ProfileModal({handleProfileModal}){
                 </div>
                 
                 <header className="profileModal__inner__header">
-                    <p>Profila rediģēšana</p>
+                    <p>{languageInfo.text.profile.editModal.heading}</p>
                 </header>
 
                 <div className="profileModal__inner__avatar-wrapper">
@@ -149,7 +151,7 @@ function ProfileModal({handleProfileModal}){
                     ) : (
                         <img src={avatar ? avatar : Avatar} alt="avatar" />
                     )}
-                    <label htmlFor="avatar">Izmainīt</label>
+                    <label htmlFor="avatar">{languageInfo.text.profile.editModal.change}</label>
                     <input type="file" name="avatar" id="avatar" onChange={(e) => selectAvatar(e)} />
                 </div>
 
@@ -158,7 +160,7 @@ function ProfileModal({handleProfileModal}){
                     {userInfo.info.is_employer ?
                         <>
                             <div className="profileModal__inner__personal-information__input-group">
-                                <label htmlFor="company_name">Kompānijas nosaukums:</label>
+                                <label htmlFor="company_name">{languageInfo.text.profile.editModal.companyName}</label>
                                 <input
                                     type="text"
                                     name='company_name'
@@ -169,7 +171,7 @@ function ProfileModal({handleProfileModal}){
                             </div>
 
                             <div className="profileModal__inner__personal-information__input-group">
-                                <label htmlFor="website">Mājas lapa:</label>
+                                <label htmlFor="website">{languageInfo.text.profile.editModal.website}</label>
                                 <input
                                     type="url"
                                     name='website'
@@ -180,7 +182,7 @@ function ProfileModal({handleProfileModal}){
                             </div>
 
                             <div className="profileModal__inner__personal-information__input-group">
-                                <label htmlFor="company_size">Darbinieku skaits:</label>
+                                <label htmlFor="company_size">{languageInfo.text.profile.editModal.employeeCount}</label>
                                 <div className="profileModal__inner__personal-information__input-group__custom-input">
                                     <div onClick={() => setCompanySizeListOpen(true)}>
                                         <input
@@ -193,7 +195,7 @@ function ProfileModal({handleProfileModal}){
                                             onChange={(e) => setCompanySize(e.target.value)}
                                         />
                                     </div>
-                                    <img src={dropdown} alt="dropdown" onClick={() => setCompanySizeListOpen(!countryListOpen)} />
+                                    <img src={dropdown} alt="dropdown" onClick={() => setCompanySizeListOpen(!companySizeListOpen)} />
                                     <ul className={companySizeListOpen ? "profileModal__inner__personal-information__input-group__custom-input__listopened" : "profileModal__inner__personal-information__input-group__custom-input__listclosed"}>
                                         {['1-10', '10-50', '50-100', '100-250', '250-500', '500+'].map((ammount, i) => 
                                             <li key={i} onClick={() => {setCompanySize(ammount);setCompanySizeListOpen(false)}}>{ammount}</li>
@@ -203,7 +205,7 @@ function ProfileModal({handleProfileModal}){
                             </div>
 
                             <div className="profileModal__inner__personal-information__input-group">
-                                <label htmlFor="phone_number">Telefona nummurs:</label>
+                                <label htmlFor="phone_number">{languageInfo.text.profile.editModal.phoneNum}</label>
                                 <input
                                     type="tel"
                                     name='phone_number'
@@ -215,7 +217,7 @@ function ProfileModal({handleProfileModal}){
                         </> :
                         <>
                             <div className="profileModal__inner__personal-information__input-group">
-                                <label htmlFor="name">Vārds:</label>
+                                <label htmlFor="name">{languageInfo.text.profile.editModal.name}</label>
                                 <input
                                     type="text"
                                     name='name' 
@@ -226,7 +228,7 @@ function ProfileModal({handleProfileModal}){
                             </div>
 
                             <div className="profileModal__inner__personal-information__input-group">
-                                <label htmlFor="surname">Uzvārds:</label>
+                                <label htmlFor="surname">{languageInfo.text.profile.editModal.surname}</label>
                                 <input
                                     type="text"
                                     name='surname' 
@@ -237,11 +239,11 @@ function ProfileModal({handleProfileModal}){
                             </div>
 
                             <div className="profileModal__inner__personal-information__input-group">
-                                <label>Profesija{userInfo.info.profile.user_proffession && `: ${userInfo.info.profile.user_proffession}`}</label>
+                                <label>{languageInfo.text.profile.editModal.profession}{userInfo.info.profile.user_proffession && `: ${userInfo.info.profile.user_proffession}`}</label>
                                 <button 
                                     className="profileModal__inner__personal-information__input-group__jobselection"
                                     onClick={(e) => {e.preventDefault();setProffessionListOpen(true)}}
-                                >{userInfo.info.profile.user_proffession ? "Mainīt" : "Izvēlēties"}</button>
+                                >{userInfo.info.profile.user_proffession ? languageInfo.text.profile.editModal.change : languageInfo.text.profile.editModal.choose}</button>
 
                                 {proffessionListOpen && (
                                     <ProffessionPopup 
@@ -253,7 +255,7 @@ function ProfileModal({handleProfileModal}){
                             </div>
 
                             <div className="profileModal__inner__personal-information__input-group">
-                                <label htmlFor="bornDate">Dzimšanas datums:</label>
+                                <label htmlFor="bornDate">{languageInfo.text.profile.editModal.birthDate}</label>
                                 <div className="profileModal__inner__personal-information__input-group__custom-input">
                                     <input 
                                         type="date" 
@@ -268,7 +270,7 @@ function ProfileModal({handleProfileModal}){
                     }
 
                     <div className="profileModal__inner__personal-information__input-group">
-                        <label htmlFor="country">Valsts:</label>
+                        <label htmlFor="country">{languageInfo.text.profile.editModal.country}</label>
                         <div className="profileModal__inner__personal-information__input-group__custom-input">
                             <div onClick={() => setCountryListOpen(true)}>
                                 <input
@@ -294,7 +296,7 @@ function ProfileModal({handleProfileModal}){
                     </div>
 
                     <div className="profileModal__inner__personal-information__input-group">
-                        <label htmlFor="city">Pilsēta:</label>
+                        <label htmlFor="city">{languageInfo.text.profile.editModal.city}</label>
                         <div className="profileModal__inner__personal-information__input-group__custom-input">
                             <div onClick={() => setCityListOpen(true)}>
                                 <input
@@ -321,16 +323,16 @@ function ProfileModal({handleProfileModal}){
 
                     {!userInfo.info.is_employer &&
                         <div className="profileModal__inner__personal-information__input-group">
-                            <label>Vai esat aktīvā darba meklēšanā?</label>
+                            <label>{languageInfo.text.profile.editModal.isActiveJobSeeker}</label>
                             <div className="profileModal__inner__personal-information__input-group__admbuttons">
                                 <button 
                                     className={isActiveJobSeeker ? "profileModal__inner__personal-information__input-group__admbuttons__active" : "profileModal__inner__personal-information__input-group__admbuttons__notactive"}
                                     onClick={(e) => {e.preventDefault();setIsActiveJobSeeker(true)}}
-                                >Jā</button>
+                                >{languageInfo.text.profile.editModal.yes}</button>
                                 <button 
                                     className={!isActiveJobSeeker ? "profileModal__inner__personal-information__input-group__admbuttons__active" : "profileModal__inner__personal-information__input-group__admbuttons__notactive"}
                                     onClick={(e) => {e.preventDefault();setIsActiveJobSeeker(false)}}
-                                >Nē</button>
+                                >{languageInfo.text.profile.editModal.no}</button>
                             </div>
                         </div>
                     }
@@ -338,7 +340,7 @@ function ProfileModal({handleProfileModal}){
 
                 {userInfo.info.is_employer ? (
                     <div className="profileModal__inner__desc">
-                        <label htmlFor="aboutme">Kompānijas apraksts:</label>
+                        <label htmlFor="aboutme">{languageInfo.text.profile.editModal.companyDescription}</label>
                         <textarea 
                             name="aboutme" 
                             id="aboutme" 
@@ -350,7 +352,7 @@ function ProfileModal({handleProfileModal}){
                     </div>
                 ) : (
                     <div className="profileModal__inner__desc">
-                        <label htmlFor="aboutme">Apraksts par sevi:</label>
+                        <label htmlFor="aboutme">{languageInfo.text.profile.editModal.description}</label>
                         <textarea 
                             name="aboutme" 
                             id="aboutme" 
@@ -364,8 +366,8 @@ function ProfileModal({handleProfileModal}){
                 
 
                 <div className="profileModal__inner__edit-options">
-                    <button onClick={(e) => {e.preventDefault();handleProfileModal()}}>Atpakaļ</button>
-                    <button onClick={(e) => sendData(e)}>Saglabāt</button>
+                    <button onClick={(e) => {e.preventDefault();handleProfileModal()}}>{languageInfo.text.profile.editModal.cancel}</button>
+                    <button onClick={(e) => sendData(e)}>{languageInfo.text.profile.editModal.save}</button>
                 </div>
 
             </form>

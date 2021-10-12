@@ -7,6 +7,7 @@ import locationReducer from "../slices/locations/locationSlice";
 import infoReducer from "../slices/info/infoSlice";
 import chatReducer from "../slices/chat/chatSlice";
 import socketReducer from "../slices/socket/socketSlice";
+import languageReducer from "../slices/languages/languageSlice";
 
 export const store = configureStore({
     reducer: {
@@ -18,5 +19,6 @@ export const store = configureStore({
         info: infoReducer,
         chat: chatReducer,
         socket: socketReducer,
+        languages: languageReducer,
     },
 });

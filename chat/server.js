@@ -17,6 +17,8 @@ app.use(fileUpload({
 //routes
 app.use("/chat", require("./routes/chatRouter"));
 app.use("/message", require("./routes/messageRouter"));
+app.use("/themes", require("./routes/themeRouter"));
+app.use("/proffessions", require("./routes/proffessionRouter"));
 
 //mongodb
 const URI = process.env.MONGODB_URL;
@@ -31,7 +33,7 @@ mongoose.connect(URI, {
 });
 
 //run server
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log("Server running on port", PORT);
 });

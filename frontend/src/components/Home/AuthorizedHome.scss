@@ -11,10 +11,10 @@
     .panel {
         width: 100%;
         min-width: 20%;
-        box-shadow: 2px 3px 10px 2px #b1b1b1;
-        border: 1px solid lightgray;
+        border: 1px solid #E9E9E9;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         background-color: white;
-        border-radius: .7rem;
+        border-radius: .5rem;
         > * {
             padding: 1.2rem;
         }
@@ -31,12 +31,13 @@
             padding: 2rem 1.2rem !important;
             background: url(../../assets/svg/home/user-background.svg);
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: 500px;
             img {
                 object-fit: contain;
-                width: 80px;
-                height: 80px;
+                width: 85px;
+                height: 85px;
                 border-radius: 50%;
+                border: 5px solid white;
             }
             .username-wrapper {
                 display: flex;
@@ -80,7 +81,6 @@
             }
         }
         &__saved {
-            background-color: lightgray;
             p {
                 font-size: 20px;
                 font-weight: bold;
@@ -103,14 +103,14 @@
         flex-direction: column;
         width: 100%;
         margin: 0 calc(8rem + 350px);
-        margin-top: 0;
+        margin-top: 30px;
         max-width: 600px;
         position: relative;
 
         &__fixed {
             position: fixed;
             width: calc(100% - 16rem - 700px);
-            top: 70px;
+            top: 100px;
             max-width: 600px;
             z-index: 2;
         }
@@ -121,7 +121,7 @@
             height: 62px;
             &__job-option {
                 height: 100%;
-                padding: 1rem 1rem 0 1rem !important;
+                padding: 1rem .3rem 0 .3rem !important;
                 white-space: nowrap;
                 h3 {
                     color: #5a5a5a;

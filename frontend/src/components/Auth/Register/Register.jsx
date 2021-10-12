@@ -8,9 +8,11 @@ import Whitearrow from '../../../assets/svg/home/next.svg';
 import { useSelector } from 'react-redux';
 import { userData } from '../../../slices/user/userSlice';
 import {useHistory} from "react-router-dom";
+import { languageData } from '../../../slices/languages/languageSlice';
 
 function Register() {
     const userInfo = useSelector(userData);
+    const languageInfo = useSelector(languageData);
     const history = useHistory();
 
     useEffect(() => {
@@ -23,16 +25,16 @@ function Register() {
         <div className='register'>
             <main className="register__main">
                 <div data-aos='fade-right' className="register__main__left">
-                    <div className="register__main__left__title">Reģistrācija</div>
-                    <div className="register__main__left__undertitle">Norādi savu lomu:</div>
+                    <div className="register__main__left__title">{languageInfo.text.registerChoose.heading}</div>
+                    <div className="register__main__left__undertitle">{languageInfo.text.registerChoose.subHeading}</div>
                     <Link to='/register/jobGiver'>
                         <button id='job-giver'>
-                            Es esmu darba devējs <img src={rightArrow} alt="" />
+                            {languageInfo.text.registerChoose.button1}<img src={rightArrow} alt="" />
                         </button>
                     </Link>
                     <Link to='/register/jobTaker'>
                         <button id='job-taker'>
-                            Es esmu darba ņēmējs <img src={Whitearrow} alt="" />
+                            {languageInfo.text.registerChoose.button2} <img src={Whitearrow} alt="" />
                         </button>
                     </Link>
                 </div>

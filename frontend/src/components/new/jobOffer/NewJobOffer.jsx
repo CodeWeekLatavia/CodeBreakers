@@ -8,11 +8,13 @@ import { userData } from '../../../slices/user/userSlice';
 import { getCountryCities } from '../../../logic/locations/getLoactionData';
 import { newPossition } from '../../../logic/company/positions/positions';
 import { useHistory } from 'react-router-dom';
+import { languageData } from '../../../slices/languages/languageSlice';
 
 function NewJobOffer() {
     const proffessionInfo = useSelector(proffessionData);
     const locationInfo = useSelector(locationData);
     const userInfo = useSelector(userData);
+    const languageInfo = useSelector(languageData);
 
     const [categoryPopupOpen, setCategoryPopupOpen] = useState(false);
     const [proffessionPopupOpen, setProffessionPopupOpen] = useState(false);
@@ -92,48 +94,48 @@ function NewJobOffer() {
     return (
         <div className="newJobOffer">
             <div className="newJobOffer__inner">
-                <h2>Izveido jaunu darba piedāvājumu</h2>
+                <h2>{languageInfo.text.newJobOffer.heading}</h2>
                 <form className="newJobOffer__inner__form" autoComplete="off">
                     <div className="newJobOffer__inner__form__labelInpContainer">
-                        <label htmlFor="name">Darba nosaukums</label>
+                        <label htmlFor="name">{languageInfo.text.newJobOffer.name}</label>
                         <input 
                             type="text" 
                             name="name" 
                             id="name" 
-                            placeholder="Nosaukums"
+                            placeholder={languageInfo.text.newJobOffer.name}
                             autoComplete="off"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
                     </div>
                     <div className="newJobOffer__inner__form__labelInpContainer">
-                        <label htmlFor="about">Darbinieku prasmes un pienākumi</label>
+                        <label htmlFor="about">{languageInfo.text.newJobOffer.requirements}</label>
                         <textarea 
                             type="text" 
                             name="about" 
                             id="about" 
-                            placeholder="Pienākumu apraksts"
+                            placeholder={languageInfo.text.newJobOffer.requirements}
                             autoComplete="off"
                             value={about}
                             onChange={(e) => setAbout(e.target.value)}
                         ></textarea>
                     </div>
                     <div className="newJobOffer__inner__form__labelInpContainer">
-                        <label htmlFor="offers">Uzņēmums darbiniekiem piedāvā:</label>
+                        <label htmlFor="offers">{languageInfo.text.newJobOffer.jobDescription}</label>
                         <textarea 
                             type="text" 
                             name="offers" 
                             id="offers" 
-                            placeholder="Uzņēmums piedāvā"
+                            placeholder={languageInfo.text.newJobOffer.jobDescription}
                             autoComplete="off"
                             value={requirements}
                             onChange={(e) => setRequirements(e.target.value)}
                         ></textarea>
                     </div>
                     <div className="newJobOffer__inner__form__categoryContainer">
-                        <p>{category ? `Mainīt darba kategoriju (pašlaik: ${category.title})` : "Izvēlies darba kategoriju"}</p>
+                        <p>{category ? `${languageInfo.text.newJobOffer.changeCategory} (${languageInfo.text.newJobOffer.currently}: ${category.title})` : languageInfo.text.newJobOffer.chooseCategory}</p>
                         <div className="newJobOffer__inner__form__categoryContainer__button" onClick={() => {setCategoryPopupOpen(true);setProffessionPopupOpen(false)}}>
-                            <p>{category ? "Mainīt" : "Izvēlēties"}</p>
+                            <p>{category ? languageInfo.text.newJobOffer.change : languageInfo.text.newJobOffer.choose}</p>
                         </div>
                         {categoryPopupOpen && (
                             <div className="newJobOffer__inner__form__categoryContainer__button__list">
@@ -150,9 +152,9 @@ function NewJobOffer() {
                     </div>
                     {category && (
                         <div className="newJobOffer__inner__form__categoryContainer">
-                            <p>{proffession ? `Mainīt profesiju (pašlaik: ${proffession.title})` : "Izvēlies profesiju"}</p>
+                            <p>{proffession ? `${languageInfo.text.newJobOffer.changeProffession} (${languageInfo.text.newJobOffer.currently}: ${proffession.title})` : languageInfo.text.newJobOffer.chooseProfession}</p>
                             <div className="newJobOffer__inner__form__categoryContainer__button" onClick={() => {setProffessionPopupOpen(true);setCategoryPopupOpen(false)}}>
-                                <p>{proffession ? "Mainīt" : "Izvēlēties"}</p>
+                                <p>{proffession ? languageInfo.text.newJobOffer.change : languageInfo.text.newJobOffer.choose}</p>
                             </div>
                             {proffessionPopupOpen && (
                                 <div className="newJobOffer__inner__form__categoryContainer__button__list">
@@ -170,13 +172,13 @@ function NewJobOffer() {
                     )}
                     <div className="newJobOffer__inner__form__locations">
                         <div className="newJobOffer__inner__form__locations__container">
-                            <label htmlFor="country">Kādā valstī ir aktuāla šī profesija?</label>
+                            <label htmlFor="country">{languageInfo.text.newJobOffer.country1}</label>
                             <input 
                                 type="text" 
                                 name="country"
                                 id="country"
                                 autoComplete="off"
-                                placeholder="Valsts"
+                                placeholder={languageInfo.text.newJobOffer.country2}
                                 onChange={(e) => setCountry(e.target.value)}
                                 value={country ? country : ""}
                                 onClick={() => setShowCountries(true)}
@@ -195,13 +197,13 @@ function NewJobOffer() {
                             )}
                         </div>
                         <div className="newJobOffer__inner__form__locations__container">
-                            <label htmlFor="city">Kādā pilsētā ir aktuāla šī profesija?</label>
+                            <label htmlFor="city">{languageInfo.text.newJobOffer.city1}</label>
                             <input 
                                 type="text" 
                                 name="city"
                                 id="city"
                                 autoComplete="off"
-                                placeholder="Pilsēta"
+                                placeholder={languageInfo.text.newJobOffer.city2}
                                 onChange={(e) => setCity(e.target.value)}
                                 onClick={getCitys}
                                 value={city ? city : ""}
@@ -219,7 +221,7 @@ function NewJobOffer() {
                         </div>
                     </div>
                     <div className="newJobOffer__inner__form__container">
-                        <p>Izvēlieties darba termiņu</p>
+                        <p>{languageInfo.text.newJobOffer.chooseJobType}</p>
                         <div className="newJobOffer__inner__form__container__buttons">
                             <button 
                                 className={contractType === "long term" ? "newJobOffer__inner__form__container__buttons__active" : "newJobOffer__inner__form__container__buttons__inactive"}
@@ -227,26 +229,26 @@ function NewJobOffer() {
                                     e.preventDefault();
                                     setContractType("long term")
                                 }}
-                            >Ilgtermiņa</button>
+                            >{languageInfo.text.newJobOffer.jobType1}</button>
                             <button 
                                 className={contractType === "short term" ? "newJobOffer__inner__form__container__buttons__active" : "newJobOffer__inner__form__container__buttons__inactive"}
                                 onClick={(e) => {
                                     e.preventDefault();
                                     setContractType("short term")
                                 }}
-                            >Īstermiņa</button>
+                            >{languageInfo.text.newJobOffer.jobType2}</button>
                             <button 
                                 className={contractType === "woluntary job" ? "newJobOffer__inner__form__container__buttons__active" : "newJobOffer__inner__form__container__buttons__inactive"}
                                 onClick={(e) => {
                                     e.preventDefault();
                                     setContractType("woluntary job")
                                 }}
-                            >Brīvprātigs</button>
+                            >{languageInfo.text.newJobOffer.jobType3}</button>
                         </div>
                     </div>
                     {contractType !== "woluntary job" && (
                         <div className="newJobOffer__inner__form__labelInpContainer">
-                            <label htmlFor="pay">Kāda būs mēneša alga?</label>
+                            <label htmlFor="pay">{languageInfo.text.newJobOffer.salary}</label>
                             <input 
                                 type="number" 
                                 name="pay" 
@@ -262,7 +264,7 @@ function NewJobOffer() {
                         {previewPhoto && (
                             <img src={previewPhoto} alt="preview" />
                         )}
-                        <label htmlFor="photo">{previewPhoto ? "Mainīt" : "Pievienot"} foto</label>
+                        <label htmlFor="photo">{previewPhoto ? languageInfo.text.newJobOffer.change : languageInfo.text.newJobOffer.add} {languageInfo.text.newJobOffer.photo}</label>
                         <input 
                             type="file" 
                             name="photo" 
@@ -271,7 +273,7 @@ function NewJobOffer() {
                             onChange={(e) => uploadPhoto(e)}
                         />
                     </div>
-                    <button className="newJobOffer__inner__form__button" onClick={(e) => submitData(e)}>Iesniegt</button>
+                    <button className="newJobOffer__inner__form__button" onClick={(e) => submitData(e)}>{languageInfo.text.newJobOffer.submit}</button>
                 </form>
             </div>
         </div>

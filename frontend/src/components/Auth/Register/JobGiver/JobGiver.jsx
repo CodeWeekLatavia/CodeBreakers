@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { userData } from '../../../../slices/user/userSlice';
 import { Link } from 'react-router-dom';
 import { registerCompany } from '../../../../logic/company/auth/auth';
+import { languageData } from '../../../../slices/languages/languageSlice';
 
 function JobGiver(){
     const [innerWidth, setInnerWidth] = useState(window.innerWidth);
@@ -27,6 +28,7 @@ function JobGiver(){
     const history = useHistory();
     const dispatch = useDispatch();
     const userInfo = useSelector(userData);
+    const languageInfo = useSelector(languageData);
 
     useEffect(() => {
         window.addEventListener('resize', function(e){
@@ -44,7 +46,7 @@ function JobGiver(){
         setEmail(e.target.value)
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if(!re.test(String(e.target.value).toLowerCase())){
-            setEmailError('Nav pareizs E-pasts!')
+            setEmailError('Not valid E-mail!')
         }
         else{
             setEmailError('')
@@ -55,9 +57,9 @@ function JobGiver(){
         setPassword(e.target.value)
         
         if(e.target.value.length < 5 ) {
-            setPasswordError('Parolei ir jābūt ne mazāk nekā 5 simboli!')
+            setPasswordError('Password must be at least 5 characters long!')
             if(!e.target.value){
-                setPasswordError('Parole nevar būt tukša!')
+                setPasswordError('Password cannot be empty!')
             }
         }
         else{
@@ -97,44 +99,42 @@ function JobGiver(){
         <div id='jobGiver' className='main'>
             <div className='company'>
                 <div className='company__left'> 
-                        <h1 className="company__left__title">
-                            Uzņēmuma Reģistrācija
-                        </h1>
-                        <p className="company__left__desc">Tas neaizņems daudz laika</p>
+                        <h1 className="company__left__title">{languageInfo.text.registerJobgiverPage.header}</h1>
+                        <p className="company__left__desc">{languageInfo.text.registerJobgiverPage.subHeader}</p>
                         <img src={jobGiver} alt="jobGiver_image"/>
                         <div className="company__left__login">
-                            <p>Jau esiet reģistrēts?</p> <Link to="/login">Ieiet</Link>
+                            <p>{languageInfo.text.registerJobgiverPage.alreadyRegistered}</p> <Link to="/login">{languageInfo.text.registerJobgiverPage.login}</Link>
                         </div>
                 </div>
                 
                 <form onSubmit={(e) => checkRegisterInfo(e)} className="company__right">
                     <div className="company__right__input-group">
                         <input className="company__right__input-group__input"value={name} onChange={(e) => setName(e.target.value)} type="text" id='name' placeholder='' required/>
-                        <label className="company__right__input-group__label" htmlFor="name">Uzņēmuma nosaukums:</label>
+                        <label className="company__right__input-group__label" htmlFor="name">{languageInfo.text.registerJobgiverPage.companyName}</label>
                     </div>           
                     <div className="company__right__input-group">
                         <input className="company__right__input-group__input" value={email} onChange={(e) => {setEmail(e.target.value);emailHandler(e)}} onBlur={(e) => blurHandler(e)} name="email" type="email" id='email' placeholder='' required/>
-                        <label className="company__right__input-group__label" htmlFor="email">Uzņēmuma e-pasts:</label>
+                        <label className="company__right__input-group__label" htmlFor="email">{languageInfo.text.registerJobgiverPage.companyEmail}</label>
                     </div>        
                     {(emailDirty && emailError) && <div className="company__right__error"style={{color:"#FA4251"}}>{emailError}</div>}
                     <div className="company__right__input-group">
                         <input className="company__right__input-group__input" onChange= {e => passwordHandler(e)} onBlur={(e) => blurHandler(e)}value={password} name="password" type={isRevealPwd ? "text" : "password"}  id='password' placeholder='' autoComplete="off" required/>
-                        <label className="company__right__input-group__label" htmlFor="password">Parole:</label>
+                        <label className="company__right__input-group__label" htmlFor="password">{languageInfo.text.registerJobgiverPage.password}</label>
                         <img title={isRevealPwd ? "Slēpt paroli" : "Parādīt paroli"} alt="eye" className="company__right__input-group__eye" src={isRevealPwd ? hidePwdImg : showPwdImg} onClick={() => setIsRevealPwd(prevState => !prevState)} />
                     </div>   
                     {(passwordDirty && passwordError) && <div className="company__right__error"style={{color:"#FA4251"}}>{passwordError}</div>}
                     <div className="company__right__checkbox">
-                        <input type="checkbox" id="checkbox" name="" value=""/>
-                        <label htmlFor="checkbox">Es piekrītu mūsu <u>Privātuma Politikai</u></label>
+                        <input type="checkbox" id="checkbox" name="" value="" required/>
+                        <label htmlFor="checkbox">{languageInfo.text.registerJobgiverPage.privacyPolicy1} <u>{languageInfo.text.registerJobgiverPage.privacyPolicy2}</u></label>
                     </div>
-                    <button type='submit' className='company__right__submit'>Reģistrēties</button>
+                    <button type='submit' className='company__right__submit'>{languageInfo.text.registerJobgiverPage.button}</button>
                     {innerWidth < 1024 &&
                         <div className="login">
-                        <p>Jau esiet reģistrēts?</p> <Link to="/login">Ieiet</Link>
-                    </div>
+                            <p>{languageInfo.text.registerJobgiverPage.alreadyRegistered}</p> <Link to="/login">{languageInfo.text.registerJobgiverPage.login}</Link>
+                        </div>
                     }
                     <div className="company__right__divider">
-                    <span className="company__right__divider__line"></span>
+                        <span className="company__right__divider__line"></span>
                     </div>
                     <div className="auth__form-wrapper__socials">
                         <div className="auth__form-wrapper__socials__social">

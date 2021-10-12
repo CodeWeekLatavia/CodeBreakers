@@ -9,10 +9,12 @@ import '../Inputs.scss';
 import { useSelector } from 'react-redux';
 import { userData } from '../../../../slices/user/userSlice';
 import { Link } from 'react-router-dom';
+import { languageData } from '../../../../slices/languages/languageSlice';
 
 function Premium(){
+    const languageInfo = useSelector(languageData);
     const userInfo = useSelector(userData);
-    const [premiumCancelReason, setPremiumCancelReason] = useState('Izvēlies Cēloni');
+    const [premiumCancelReason, setPremiumCancelReason] = useState(languageInfo.text.settings.premium.chooseReason);
 
     const [showPremiumCancelReason, setShowPremiumCancelReason] = useState(false);
 
@@ -20,22 +22,22 @@ function Premium(){
         <div className='settings-wrapper'>
             <div className="settings">
                 <div className="settings__premium__header">
-                    <h2 className="settings__title"><img src={crown} alt="crown" />Premium</h2>
+                    <h2 className="settings__title"><img src={crown} alt="crown" />{languageInfo.text.settings.premium.heading}</h2>
                     <span>
-                        <Link to="/premium">Premium plāni</Link>
+                        <Link to="/premium">{languageInfo.text.settings.premium.link}</Link>
                     </span>
                 </div>
 
                 <div className="settings__premium__status">
-                    <h4>Premium Statuss</h4>
+                    <h4>{languageInfo.text.settings.premium.status}</h4>
                     <div className="settings__premium__status__wrapper">
                         {userInfo.info.has_premium ? (
                             <>
                                 <img src={crown} alt="crown" />
-                                <p>Aktīvs</p>
+                                <p>{languageInfo.text.settings.premium.active}</p>
                             </>
                         ) : (
-                            <p>Neaktīvs</p>
+                            <p>{languageInfo.text.settings.premium.notActive}</p>
                         )}
                         
                     </div>
@@ -43,19 +45,19 @@ function Premium(){
             </div>
             {userInfo.info.has_premium && (
                 <div className="settings">
-                    <h2 className="settings__title red">Premium Statusa Deaktivizācija</h2>
+                    <h2 className="settings__title red">{languageInfo.text.settings.premium.deactivate.heading}</h2>
 
                     <section className="settings__section">
-                        <h3 className="settings__section__title">Kas notiks ja deaktivizēšu savu premium statusu?</h3>
-                        <p className="settings__section__desc">Ja neesat izmantojis Premium līdz mēneša beigām, par kuru samaksājāt, tas tiks deaktivizēts no nākamā mēneša sākuma</p>
-                        <p className="settings__section__desc">Vissas Premium funkcijas nebūs Tev pieejamas, un Tu nevarēsi pilnībā izbaudīt mūsu Web-aplikāciju</p>
-                        <p className="settings__section__desc">Mums būs ļoti skumji. Tu taču nevēlējies, lai mums būtu skumji?</p>
+                        <h3 className="settings__section__title">{languageInfo.text.settings.premium.deactivate.question}</h3>
+                        <p className="settings__section__desc">{languageInfo.text.settings.premium.deactivate.answer1}</p>
+                        <p className="settings__section__desc">{languageInfo.text.settings.premium.deactivate.answer2}</p>
+                        <p className="settings__section__desc">{languageInfo.text.settings.premium.deactivate.answer3}</p>
                     </section>
 
                     <section className="settings__section">
                         <div className="settings__section__grayed">
                             <div className="inputs__dropdown-input">
-                                <label className="inputs__dropdown-input__name">Es gribu deaktivizēt manu premium statusu tāpēc ka...</label>
+                                <label className="inputs__dropdown-input__name">{languageInfo.text.settings.premium.deactivate.reason}</label>
                                 <div className="inputs__dropdown-input__input-group" onClick={() => setShowPremiumCancelReason(!showPremiumCancelReason)}>
                                     <p>{premiumCancelReason}</p>
                                     <img src={dropdown} alt="dropdown" />
@@ -67,7 +69,7 @@ function Premium(){
                             </div>
                         </div>
                         <div className="align-right">
-                            <button className="button-red">Deaktivizēt Premium</button>
+                            <button className="button-red">{languageInfo.text.settings.premium.deactivate.buton}</button>
                         </div>
                     </section>
                 </div>

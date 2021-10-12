@@ -14,6 +14,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
 
+
 # Application definition
 
 INSTALLED_APPS = [

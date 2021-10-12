@@ -7,13 +7,17 @@ import rightArrow from '../../assets/svg/home/rightArrow.svg';
 import Whitearrow from '../../assets/svg/home/next.svg';
 import './Home.scss';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { languageData } from '../../slices/languages/languageSlice';
 
-const popularFinds = ['Inženierzinātnes', 'Māksla un kultūra', 'Vadība un administrācija', 'Ekonomika', 'IT sfēra', 'Marketings,reklāma un PR', 'Valodniecība', 'Pakalpojumi un tūrisms', 'Skaistums un mode', 'Sports']
+//const popularFinds = ['Inženierzinātnes', 'Māksla un kultūra', 'Vadība un administrācija', 'Ekonomika', 'IT sfēra', 'Marketings,reklāma un PR', 'Valodniecība', 'Pakalpojumi un tūrisms', 'Skaistums un mode', 'Sports']
+const popularFinds = ['Engineering', 'Arts and Culture', 'Management and Admini...', 'Economics',' IT ',' Marketing, Advertising',' Linguistics', 'Services and Tourism', 'Beauty and Fashion', ' Sports' ]
 
 function Home({categoryRef, admRef, homeTop}){
     const [year] = useState(new Date().getFullYear())
     const [showAllFinds, setShowAllFinds] = useState(false);
 
+    const languageInfo = useSelector(languageData);
     const history = useHistory();
 
     function handleFindsCount(){
@@ -30,18 +34,18 @@ function Home({categoryRef, admRef, homeTop}){
             <section className="home__introduction" id="top">
 
                 <div data-aos="fade-right" className="home__introduction__left">
-                    <p className="home__introduction__left__title">Sveicināts Youth <span>Deal</span> !</p>
-                    <p className="home__introduction__left__under-title" id="title">Katram darbiniekam vispiemērotākais amats</p>
-                    <p className="home__introduction__left__under-title"> Katram darba devējam vispiemērotākais darbinieks</p>
+                    <p className="home__introduction__left__title">{languageInfo.text.homePage.heading1} Youth <span>Deal</span> !</p>
+                    <p className="home__introduction__left__under-title" id="title">{languageInfo.text.homePage.subHeader1}</p>
+                    <p className="home__introduction__left__under-title">{languageInfo.text.homePage.subHeader2}</p>
                     
                     <div className="home__introduction__left__paths">
 
                         <button className="home__introduction__left__paths__job-giver" onClick={() => history.push("/register/jobGiver")}>
-                            Es esmu darba devējs <img src={rightArrow} alt="job giver" />
+                            {languageInfo.text.homePage.button1} <img src={rightArrow} alt="job giver" />
                         </button>
 
                         <button className="home__introduction__left__paths__job-taker" onClick={() => history.push("/register/jobTaker")}>
-                            Es esmu darba ņēmējs <img src={Whitearrow} alt="job taker"/>
+                            {languageInfo.text.homePage.button2} <img src={Whitearrow} alt="job taker"/>
                         </button>
 
                     </div>
@@ -59,11 +63,11 @@ function Home({categoryRef, admRef, homeTop}){
             <section className="home__find-options" id="categories" ref={categoryRef}>
              
                 <div className="home__find-options__left">
-                    <h3>Atrodi darbu vai darbinieku ikvienā jomā:</h3>
+                    <h3>{languageInfo.text.homePage.findOptions.heading}</h3>
                 </div>
                 
                 <div data-aos="fade-up" className="home__find-options__right">
-                    <p className="home__find-options__right__title">Populārākie Meklējumi</p>
+                    <p className="home__find-options__right__title">{languageInfo.text.homePage.findOptions.popularSearches}</p>
                     <div className="home__find-options__right__finds">
                         {popularFinds.slice(0, handleFindsCount()).map((find,index) => (
                             <div key={index} className="home__find-options__right__finds__find">
@@ -71,7 +75,7 @@ function Home({categoryRef, admRef, homeTop}){
                             </div>
                         ))}
                         <div onClick={() => {setShowAllFinds(!showAllFinds)}} className="home__find-options__right__finds__show-more">
-                            Parādīt vēl <img src={rightArrow} alt="arrow-down" className={showAllFinds ? 'active' : ''} />
+                            {languageInfo.text.homePage.findOptions.showMore} <img src={rightArrow} alt="arrow-down" className={showAllFinds ? 'active' : ''} />
                         </div>
                     </div>
                 </div>
@@ -79,38 +83,33 @@ function Home({categoryRef, admRef, homeTop}){
 
             <section className="home__find-talents" id="find">
 
-                <p className="home__find-talents__title">
-                    Atrodi labākos komandas biedrus savam projektam
-                </p>
+                <p className="home__find-talents__title">{languageInfo.text.homePage.findTeamMembers.heading}</p>
                 
                 <p className="home__find-talents__desc">
-                    Vai vēlies atrast komandas biedrus savam projektam? 
+                {languageInfo.text.homePage.findTeamMembers.subHeading1}
                 </p>
                 <p className="home__find-talents__desc" id="second">
-                    Pievieno piedāvājumu, saņem pieteikumus un atlasi labākos!  
+                {languageInfo.text.homePage.findTeamMembers.subHeading2} 
                 </p>
 
-                <button className='home__find-talents__find-together' onClick={() => history.push("/register")}>Atrast kopā ar Youth Deal</button>
+                <button className='home__find-talents__find-together' onClick={() => history.push("/register")}>{languageInfo.text.homePage.findTeamMembers.buttonText} </button>
 
                 <img data-aos="fade-left"  src={team} alt="find talents" />
             </section>
 
             <section className="home__info" id="ADM" ref={admRef}>
-
                 <div className="home__info__contacts">
-                    <p className="home__info__contacts__title">Kontakti</p>
-                    <p className="home__info__adm__desc">Sazinies ar potenciālo daba devēju, ņēmēju vai arī komandas biedru</p>
+                    <p className="home__info__contacts__title">{languageInfo.text.homePage.contacts.heading}</p>
+                    <p className="home__info__adm__desc">{languageInfo.text.homePage.contacts.subHeading}</p>
                     <img src={contacts} alt="contact" id="contact_image" data-aos="zoom-in" data-aos-easing="ease-out-cubic" />
-                    <button onClick={() => history.push("/register")}>Atrast Kontaktus</button>
+                    <button onClick={() => history.push("/register")}>{languageInfo.text.homePage.contacts.button}</button>
                 </div>
 
                 <div className="home__info__adm">
-                    <p className="home__info__adm__title">#ADM</p>
-                    <p className="home__info__adm__desc">
-                        Ja Tu pašlaik esi aktīvā darba meklēšanā (#ADM), tad šī loma ir piemērota tieši Tev! Atzīmē to reģistrācijas laikā vai arī jebkurā brīdī profila iestatījumos
-                    </p>
+                    <p className="home__info__adm__title">{languageInfo.text.homePage.adm.heading}</p>
+                    <p className="home__info__adm__desc">{languageInfo.text.homePage.adm.subHeading}</p>
                     <img src={adm} alt="ADM" data-aos="zoom-out" data-aos-easing="ease-out-cubic"/>
-                    <button onClick={() => history.push("/register")} id="start">Sākt</button>
+                    <button onClick={() => history.push("/register")} id="start">{languageInfo.text.homePage.adm.button}</button>
                 </div>
             </section>
             <div className='home__footer'>
@@ -118,18 +117,18 @@ function Home({categoryRef, admRef, homeTop}){
                     <div className="footer__links">
                         <div className="footer__links__block">
                             <p className={'footer__links__block__title'}>YOUTH DEAL</p>
-                            <a href="#start" className="footer__links__block__link" onClick={() => history.push("/register")}>Sākt</a>
-                            <a href="#parmums" className="footer__links__block__link">Par Mums</a>
-                            <a href="#Contacts" className="footer__links__block__link">Kontakti</a>
+                            <p className="footer__links__block__link" onClick={() => history.push("/register")}>{languageInfo.text.footer.links.begin}</p>
+                            <a href="#parmums" className="footer__links__block__link">{languageInfo.text.footer.links.about}</a>
+                            <a href="#Contacts" className="footer__links__block__link">{languageInfo.text.footer.links.contacts}</a>
                         </div>
                         <div className="footer__links__block">
-                            <p className={'footer__links__block__title'}>ATBALSTS</p>
-                            <a href="#conf" className="footer__links__block__link">Nepieciešama palīdzība?</a>
-                            <a href="#userules" className="footer__links__block__link">Lietošanas noteikumi</a>
-                            <a href="#help" className="footer__links__block__link">Privātuma politika</a>
+                            <p className={'footer__links__block__title'}>{languageInfo.text.footer.links.support}</p>
+                            <a href="#conf" className="footer__links__block__link">{languageInfo.text.footer.links.needHelp}</a>
+                            <a href="#userules" className="footer__links__block__link">{languageInfo.text.footer.links.userRules}</a>
+                            <a href="#help" className="footer__links__block__link">{languageInfo.text.footer.links.privacyPolicy}</a>
                         </div>
                         <div className="footer__links__block">
-                            <p className={'footer__links__block__title'}>SOCIĀLIE TĪKLI</p>
+                            <p className={'footer__links__block__title'}>{languageInfo.text.footer.links.socialSites}</p>
                             <a href="#facebook" className="footer__links__block__link">Facebook</a>
                             <a href="#instagram" className="footer__links__block__link">Instagram</a>
                             <a href="#youtube" className="footer__links__block__link">YouTube</a>
@@ -145,8 +144,7 @@ function Home({categoryRef, admRef, homeTop}){
                             </g>
                         </svg>
                         <div className="footer__info__texts">
-                            <p id="first">Youth Deal ir ērtāka un inovatīvāka vide darba tirgum. Mēs sniedzam iespēju ikvienam jaunietim atrast sev piemērotu darbu un sākt veidot savu karjeru. Kā arī palīdzam ikvienam darba devējam atrast vispiemērotāko darbinieku.
-                            -Atrodi vispiemērotāko kopā ar Youth Deal.</p>
+                            <p id="first">{languageInfo.text.footer.description}</p>
                         </div>
                     </div>
                 </div>

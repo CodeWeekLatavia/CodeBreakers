@@ -7,6 +7,7 @@ import { chatData } from '../../../slices/chat/chatSlice';
 import { NewChat } from '../../../logic/chat/chatOptions';
 import { userData } from '../../../slices/user/userSlice';
 import { useDispatch } from 'react-redux';
+import { languageData } from '../../../slices/languages/languageSlice'
 
 function SwipedUser({info}) {
     const [user, setUser] = useState(null);
@@ -17,6 +18,7 @@ function SwipedUser({info}) {
     const dispatch = useDispatch();
     const chatInfo = useSelector(chatData);
     const userInfo = useSelector(userData);
+    const languageInfo = useSelector(languageData);
 
     useEffect(() => {
         if (!user) {
@@ -38,7 +40,7 @@ function SwipedUser({info}) {
             <div className="user">
                 <img src={user.photo} alt="user" onClick={() => history.push(`/profile/${user.user}`)} />
                 <div className="user__info" onClick={() => history.push(`/profile/${user.user}`)}>
-                    <p id="username">{userBaseInfo.first_name} {userBaseInfo.last_name} {user.is_active_jobseeker ? <span>#ADM</span> : ''}</p>
+                    <p id="username">{userBaseInfo.first_name} {userBaseInfo.last_name} {user.is_active_jobseeker ? <span>{languageInfo.text.authorizedHomePage.adm}</span> : ''}</p>
                 </div>
                 <button onClick={() => {
                     if (hasChat) {
@@ -46,7 +48,7 @@ function SwipedUser({info}) {
                     } else {
                         NewChat(userInfo.info.id, user.id, history, dispatch);
                     }
-                }}>{hasChat ? "Sarakste" : "Sākt saraksti"}</button>
+                }}>{hasChat ? languageInfo.text.profile.chat1 : languageInfo.text.profile.chat2}</button>
             </div>
         )
     }

@@ -12,16 +12,21 @@ import { proffessionData } from '../../slices/proffessions/proffessionSlice'
 import Avatar from '../../assets/svg/avatar.svg';
 import SearchBar from './searchBar/SearchBar';
 import { infoData, setFilterTags } from '../../slices/info/infoSlice';
+import { languageData } from '../../slices/languages/languageSlice';
+import { supportedLanguages } from '../../data/languages';
+import { getTranslatedText } from '../../logic/languages/languageOptions';
 
 function AuthorizedHeader() {
     const [innerWidth, setInnerWidth] = useState(window.innerWidth);
     const [isHamburgerActive, setIsHamburgerActive] = useState(false)
     const [categoriesOpen, setCategoriesOpen] = useState(false);
     const [open, setOpen] = useState(false);
+    const [langOpen, setLangOpen] = useState(false);
 
     const proffessionInfo = useSelector(proffessionData);
     const userInfo = useSelector(userData);
     const pageInfo = useSelector(infoData);
+    const languageInfo = useSelector(languageData);
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -65,14 +70,15 @@ function AuthorizedHeader() {
 
     const TopLinks = () => {
         return <ul className="header__top__links">
-            <li onClick={() => history.push("/")}>Sākums</li>
-            <li onClick={() => history.push("/chat")}>Čats</li>
-            <li onClick={() => setCategoriesOpen(!categoriesOpen)}>Kategorijas</li>
+            <li onClick={() => history.push("/")}>{languageInfo.text.authorizedHeader.home}</li>
+            <li onClick={() => history.push("/chat")}>{languageInfo.text.authorizedHeader.chat}</li>
+            <li onClick={() => setCategoriesOpen(!categoriesOpen)}>{languageInfo.text.authorizedHeader.categories}</li>
             <div className={`header__top__links__categories ${categoriesOpen ? 'active' : ''}`}>
                 {proffessionInfo.proffessions.map((proffession, i) => (
                     <p key={i} onClick={() => setFilterCategory({type: "category", title: proffession.title, id: proffession.id, occupations: proffession.occupations})}>{proffession.title}</p>
                 ))}
             </div>
+            <li onClick={() => history.push("/courses")}>{languageInfo.text.authorizedHeader.courses}</li>
         </ul>
     };
 
@@ -86,26 +92,40 @@ function AuthorizedHeader() {
                     alt="profile"
                 />
                 <p onClick={() =>  history.push(`/profile/${userInfo.info.id}`)}>{isCompany ? `${userInfo.info.profile.company_name}` : `${userInfo.info.first_name} ${userInfo.info.last_name}`}</p>
-                <img onClick={() => setOpen(!open)} src={dropdown} alt="dropdown" id="image"/>
+                <img className={`header__top__right__user-wrapper__dropdown ${open ? 'active':''}`} onClick={() => setOpen(!open)} src={dropdown} alt="dropdown" id="image"/>
             </div>
             
             <div  id="dropdown">
                     {open && (
                         <div className="dropdown">
                             <ul>
-                                <div className="dropdown__with__icon" onClick={() => { history.push(`/profile/${userInfo.info.id}`); setOpen(false); }}><img src={userInfo.info.profile.photo ? userInfo.info.profile.photo : Avatar} alt="profile" id="profile" /><li>Mans Konts</li></div>
-                                <li onClick={() => history.push(`/${isCompany ? "new/jobOffer" : ""}`)}>{isCompany ? "Jauna darba vakance" : "Profila reklāma"}</li>
-                                <div className="dropdown__with__icon" onClick={() => history.push("/premium")}><img src={Crown} alt="premium" id="profile_icon" /><li>Premium</li></div>
+                                <div className="dropdown__with__icon" onClick={() => { history.push(`/profile/${userInfo.info.id}`); setOpen(false); }}><img src={userInfo.info.profile.photo ? userInfo.info.profile.photo : Avatar} alt="profile" id="profile" /><li>{languageInfo.text.authorizedHeader.dropdown.profile}</li></div>
+                                <li onClick={() => history.push(`/${isCompany ? "new/jobOffer" : ""}`)}>{isCompany ? languageInfo.text.authorizedHeader.dropdown.newJobOffer : languageInfo.text.authorizedHeader.dropdown.profileAdd}</li>
+                                <div className="dropdown__with__icon" onClick={() => history.push("/premium")}><img src={Crown} alt="premium" id="profile_icon" /><li>{languageInfo.text.authorizedHeader.dropdown.premium}</li></div>
                                 {!userInfo.info.is_employer &&
-                                    <li onClick={() => history.push('/saved')}>Saglābātie</li>
+                                    <li onClick={() => history.push('/saved')}>{languageInfo.text.authorizedHeader.dropdown.saved}</li>
                                 }
-                                <div className="dropdown__with__icon"><img src={Language} alt="language" id="profile_icon" /><li>Latviešu</li></div>
+                                <div className="dropdown__with__icon" onClick={() => setLangOpen(!langOpen)}>
+                                    <img src={Language} alt="language" id="profile_icon" />
+                                    <li>{languageInfo.text.authorizedHeader.dropdown.language}</li>
+                                    <i className={`fa fa-caret-down ${langOpen ? 'active' : ''}`} aria-hidden="true"></i>
+                                </div>
+                                <div className={`dropdown__languages ${langOpen ? 'active' : ''}`}>
+                                    {supportedLanguages.map((lang, i) => (
+                                        <ul className="dropdown__languages__language" key={i}>
+                                            <li className="dropdown__with__icon" onClick={() => getTranslatedText(dispatch, lang.lng)}>
+                                                <img src={lang.flag} alt={`${lang.lng} flag`}></img>
+                                                {lang.short}
+                                            </li>
+                                        </ul>
+                                    ))}
+                                </div>
                                 <li>€ EUR</li>
-                                <li onClick={() => history.push(`/settings`)}>Iestatījumi</li>
+                                <li onClick={() => history.push(`/settings`)}>{languageInfo.text.authorizedHeader.dropdown.settings}</li>
                                 {userInfo.info.isAdmin && (
                                     <li onClick={() => { history.push("/admin"); setOpen(false); }}>Admin</li>
                                 )}
-                                <li className="dropdown__last" onClick={logout}>Iziet</li>
+                                <li className="dropdown__last" onClick={logout}>{languageInfo.text.authorizedHeader.dropdown.logout}</li>
                             </ul>
                         </div>
                     )}
@@ -157,3 +177,5 @@ function AuthorizedHeader() {
 }
 
 export default AuthorizedHeader;
+
+

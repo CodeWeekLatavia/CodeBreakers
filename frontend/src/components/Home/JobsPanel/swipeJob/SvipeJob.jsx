@@ -6,6 +6,7 @@ import { jobSeekerAcceptJobOffer } from '../../../../logic/jobOffers/swipe';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { userData } from '../../../../slices/user/userSlice';
+import { languageData } from '../../../../slices/languages/languageSlice';
 
 function SvipeJob({job}) {
     const [swiped, setSwiped] = useState("");
@@ -14,6 +15,7 @@ function SvipeJob({job}) {
 
     const dispatch = useDispatch();
     const userInfo = useSelector(userData);
+    const languageInfo = useSelector(languageData);
 
     useEffect(() => {
         if(swiped !== ""){
@@ -37,9 +39,9 @@ function SvipeJob({job}) {
                     <h3>{companyInfo.company_name && companyInfo.company_name}</h3>
                 </div>
                 <div className="swipe-card__body">
-                    <h3>Darba apraksts:</h3>
+                    <h3>{languageInfo.text.jobOffer.responsabilities}</h3>
                     <p>{job.position_info}</p>
-                    <h3>Uzņēmums piedāvā</h3>
+                    <h3>{languageInfo.text.jobOffer.companyOffers}</h3>
                     <p>{job.position_requirements}</p>
                 </div>
                 <div className="swipe-card__bottom">

@@ -7,6 +7,7 @@ import CloseIcon from '../../../../assets/svg/close.svg';
 import Option from '../../../../assets/svg/options-icon-no-background.svg'
 import {useHistory} from "react-router-dom"
 import { deleteChat } from '../../../../logic/chat/chatOptions';
+import { languageData } from '../../../../slices/languages/languageSlice';
 
 function Contact({chat, search, setSearch, handleToggle=()=>{}}) {
     const [chatMemberInfo, setChatMemberInfo] = useState(null);
@@ -18,6 +19,7 @@ function Contact({chat, search, setSearch, handleToggle=()=>{}}) {
     const dispatch = useDispatch();
 
     const userInfo = useSelector(userData);
+    const languageInfo = useSelector(languageData);
 
     useEffect(() => {
         if(!otherMembers){
@@ -53,7 +55,7 @@ function Contact({chat, search, setSearch, handleToggle=()=>{}}) {
                         <div className="contacts-container__contacts__contacts-list__options__header">
                             <img src={CloseIcon} alt="close" onClick={() => setContactOptionsActive(false)} />
                         </div>
-                        <li onClick={() => deleteChat(chat._id, userInfo.info.id, dispatch)}>Dzēst saraksti</li>
+                        <li onClick={() => deleteChat(chat._id, userInfo.info.id, dispatch)}>{languageInfo.text.chat.deleteChat}</li>
                     </ul>
                 )}
             </div>

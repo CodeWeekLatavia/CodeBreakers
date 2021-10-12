@@ -127,6 +127,9 @@
                         }
                     }
                 }
+                &.seen-msg{
+                    font-weight: bold;
+                }
                 &__text-box {
                     background: #F0F0F0;
                     max-width: 500px;
@@ -312,5 +315,21 @@
                 }
             }
         }
+    }
+}
+
+#chat_link{
+    span{
+        width: 20px;
+        height: 20px;
+        background: red;
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        right: -25px;
     }
 }

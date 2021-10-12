@@ -12,10 +12,15 @@ import Premium from './settings/Premium/Premium';
 import Payment from './settings/Payment/Payment'
 import Notifications from './settings/Notifications/Notifications'
 
+import { useSelector } from 'react-redux';
+import { languageData } from '../../slices/languages/languageSlice';
+
 function ProfileSettings(){
     const [activePage, setActivePage] = useState(<Profile />);
     const [activeLink, setActiveLink] = useState('profile');
     const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+
+    const languageInfo = useSelector(languageData)
 
     useEffect(() => {
         window.addEventListener('resize', function (e) {
@@ -34,35 +39,35 @@ function ProfileSettings(){
                             setActivePage(<Profile />);
                             setActiveLink('profile');
                         }}
-                    > <img src={profile} alt="profile" /> Konts</span>
+                    > <img src={profile} alt="profile" /> {languageInfo.text.settings.profile.heading}</span>
                     <span
                         className={`profileSettings__aside__nav__link ${activeLink === 'security' ? 'active' : ''}`}
                         onClick={() => {
                             setActivePage(<Security />);
                             setActiveLink('security');
                         }}
-                    > <img src={security} alt="security" /> Drošība</span>
+                    > <img src={security} alt="security" /> {languageInfo.text.settings.security.heading}</span>
                     <span
                         className={`profileSettings__aside__nav__link ${activeLink === 'premium' ? 'active' : ''}`}
                         onClick={() => {
                             setActivePage(<Premium />);
                             setActiveLink('premium');
                         }}
-                    > <img src={premium} alt="premium" /> Premiums un maksājumi</span>
+                    > <img src={premium} alt="premium" /> {languageInfo.text.settings.premium.heading}</span>
                     <span
                         className={`profileSettings__aside__nav__link ${activeLink === 'payment' ? 'active' : ''}`}
                         onClick={() => {
                             setActivePage(<Payment />);
                             setActiveLink('payment');
                         }}
-                    > <img src={payment} alt="payment" /> Maksājumi un informācija</span>
+                    > <img src={payment} alt="payment" /> {languageInfo.text.settings.payments.heading1}</span>
                     <span
                         className={`profileSettings__aside__nav__link ${activeLink === 'notifications' ? 'active' : ''}`}
                         onClick={() => {
                             setActivePage(<Notifications />);
                             setActiveLink('notifications');
                         }}
-                    > <img src={notifications} alt="notifications" /> Paziņojumi</span>
+                    > <img src={notifications} alt="notifications" /> {languageInfo.text.settings.notifications.heading}</span>
                 </nav>
                 }
             </aside>

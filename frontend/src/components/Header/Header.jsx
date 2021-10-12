@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {useHistory} from 'react-router-dom'
 
 import CrownIcon from '../../assets/svg/crown.svg'
 import GlobalIcon from '../../assets/svg/global.svg'
+import { supportedLanguages } from '../../data/languages';
+import { getTranslatedText } from '../../logic/languages/languageOptions';
+import { languageData } from '../../slices/languages/languageSlice';
 import './Header.scss'
 
 function Header({categoryRef, admRef, homeTop}){
     const [innerWidth, setInnerWidth] = useState(window.innerWidth);
     const [isHamburgerActive, setIsHamburgerActive] = useState(false)
     const [isLanguagesExpanded, setIsLanguagesExpanded] = useState(false)
+    const languageInfo = useSelector(languageData);
 
+    const dispatch = useDispatch();
     const history = useHistory();
 
     useEffect(() => {
@@ -45,7 +51,6 @@ function Header({categoryRef, admRef, homeTop}){
     }
 
 
-
     return(
         <div className="header" id="header">
             <svg onClick={() => {scrollView(homeTop)}} className='header__logo' alt="Web Logo" xmlns="http://www.w3.org/2000/svg" width="282.734" height="121.223" viewBox="0 0 282.734 121.223">
@@ -64,29 +69,26 @@ function Header({categoryRef, admRef, homeTop}){
             </div>
 
             <div className={`header__links ${isHamburgerActive ? 'active' : ''}`}>
-                <p className='header__links__link' onClick={() => {history.push("/home");scrollView(homeTop)}}>Sākums</p>
-                <p className='header__links__link' href="#" onClick={() => scrollView(categoryRef)}>Kategorijas</p>
-                <p onClick={() => scrollView(admRef)} className='header__links__link' href="#">#ADM</p>
-                <p className='header__links__link' id="premium" onClick={() => {history.push("/premium")}}><img src={CrownIcon} alt="Crown Img" id="crown"></img>Premium</p>
+                <p className='header__links__link' onClick={() => {history.push("/home");scrollView(homeTop)}}>{languageInfo.text.header.homeLink}</p>
+                <p className='header__links__link' href="#" onClick={() => scrollView(categoryRef)}>{languageInfo.text.header.categoryLink}</p>
+                <p onClick={() => scrollView(admRef)} className='header__links__link' href="#">{languageInfo.text.header.admLink}</p>
+                <p className='header__links__link' id="premium" onClick={() => {history.push("/premium")}}><img src={CrownIcon} alt="Crown Img" id="crown"></img>{languageInfo.text.header.premiumLink}</p>
 
                 {innerWidth <= 1200 &&
                     <div id="header__right">
                         <div className="header__auth-options">
-                            <button onClick={() => { history.push("/login"); }} className='header__auth-options__login'>Ieiet</button>
-                            <button onClick={() => { history.push("/register"); }} className='header__auth-options__register'>Reģistrēties</button>
+                            <button onClick={() => { history.push("/login"); }} className='header__auth-options__login'>{languageInfo.text.header.loginLink}</button>
+                            <button onClick={() => { history.push("/register"); }} className='header__auth-options__register'>{languageInfo.text.header.registerLink}</button>
                         </div>
 
                         <div className="header__languages">
-                                <div className={`header__languages__options ${isLanguagesExpanded ? 'active' : ''}`}>
-                                    <ul className="header__languages__options__option">
-                                        <li>LV</li>
+                            <div className={`header__languages__options ${isLanguagesExpanded ? 'active' : ''}`}>
+                                {supportedLanguages.map((lang, i) => (
+                                    <ul className="header__languages__options__option" key={i}>
+                                        {/* <li onClick={() => getTranslatedText(dispatch, lang.lng)}>{lang.short}</li> */}
+                                        <li onClick={() => getTranslatedText(dispatch, lang.lng)}><img src={lang.flag} alt={`${lang.lng} flag`} /> {lang.short}</li>
                                     </ul>
-                                    <ul className="header__languages__options__option">
-                                        <li>EN</li>
-                                    </ul>
-                                    <ul className="header__languages__options__option">
-                                        <li>RU</li>
-                                    </ul>
+                                ))}
                             </div>
                         </div>
                     </div>}
@@ -94,21 +96,18 @@ function Header({categoryRef, admRef, homeTop}){
             {innerWidth > 1200 &&
             <div id="header__right">
                 <div className="header__auth-options">
-                    <button onClick={() => {history.push("/register")}} className='header__auth-options__register'>Reģistrēties</button>
-                    <button onClick={() => {history.push("/login")}} className='header__auth-options__login'>Ieiet</button>
+                    <button onClick={() => {history.push("/register")}} className='header__auth-options__register'>{languageInfo.text.header.registerLink}</button>
+                    <button onClick={() => {history.push("/login")}} className='header__auth-options__login'>{languageInfo.text.header.loginLink}</button>
                 </div>
 
                 <div className="header__languages">
                     <div className={`header__languages__options ${isLanguagesExpanded ? 'active' : ''}`}>
-                        <ul className="header__languages__options__option">
-                            <li>LV</li>
-                        </ul>
-                        <ul className="header__languages__options__option">
-                            <li>EN</li>
-                        </ul>
-                        <ul className="header__languages__options__option">
-                            <li>RU</li>
-                        </ul>
+                        {supportedLanguages.map((lang, i) => (
+                            <ul className="header__languages__options__option" key={i}>
+                                {/* <li onClick={() => getTranslatedText(dispatch, lang.lng)}>{lang.short}</li> */}
+                                <li onClick={() => getTranslatedText(dispatch, lang.lng)}><img src={lang.flag} alt={`${lang.lng} flag`} /> {lang.short}</li>
+                            </ul>
+                        ))}
                     </div>
                     <div className="header__languages__language-expander" onClick={languageExpandHandler}>
                         <img src={GlobalIcon} alt="lang" />

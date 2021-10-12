@@ -5,10 +5,12 @@ import { useSelector } from "react-redux";
 
 import { userData } from "../../slices/user/userSlice";
 import SavedJob from "./savedJob/SavedJob";
+import { languageData } from "../../slices/languages/languageSlice";
 
 const Saved = () => {
     const userInfo = useSelector(userData);
     const [activeJobOption, setActiveJobOption] = useState('long term');
+    const languageInfo = useSelector(languageData);
 
     return (
         <div className="saved">
@@ -16,13 +18,13 @@ const Saved = () => {
                 <ul className="saved__left__options">
                     <li className={`saved__left__options__option ${activeJobOption === 'long term' ? 'active' : ''}`} onClick={() => {
                         setActiveJobOption('long term');
-                    }}>Ilgtermiņa darbi</li>
+                    }}>{languageInfo.text.saved.jobType1}</li>
                     <li className={`saved__left__options__option ${activeJobOption === 'short term' ? 'active' : ''}`} onClick={() => {
                         setActiveJobOption('short term');
-                    }}>Īstermiņa darbi</li>
+                    }}>{languageInfo.text.saved.jobType2}</li>
                     <li className={`saved__left__options__option ${activeJobOption === 'voluntary' ? 'active' : ''}`} onClick={() => {
                         setActiveJobOption('voluntary');
-                    }}>Brīvprātīgie darbi</li>
+                    }}>{languageInfo.text.saved.jobType3}</li>
                 </ul>
             </div>
             <div className="saved__right">

@@ -26,6 +26,8 @@ class CompanyProfile(models.Model):
     specialization = models.CharField(max_length=500, blank=True)
     website_url = models.CharField(max_length=200, blank=True, default='')
 
+    is_verified = models.BooleanField(max_length=200, blank=True, default=False)
+
     def __str__(self):
         return f'{self.company_name}\'s Company profile'
 
@@ -61,7 +63,11 @@ class Position(models.Model):
     photo = models.ImageField(upload_to='company_photos/', blank=True)
 
     def __str__(self):
-        return f'{self.company.company_name}: {self.position_occupation.title}' 
+        if self.position_occupation:
+            occupation_title = self.position_occupation.title
+        else:
+            occupation_title = None
+        return f'{self.company.company_name}: {occupation_title}' 
 
 
 

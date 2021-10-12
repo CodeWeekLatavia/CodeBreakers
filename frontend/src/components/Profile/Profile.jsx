@@ -31,6 +31,7 @@ import { socketData } from '../../slices/socket/socketSlice';
 import { chatData } from '../../slices/chat/chatSlice';
 import { getCompanysPositions } from '../../logic/company/find/findCompanysPositions';
 import CompanyJob from './companyJobs/CompanyJob';
+import { languageData } from '../../slices/languages/languageSlice';
 
 function Profile(){
     const [editProfile, setEditProfile] = useState(false);
@@ -48,6 +49,7 @@ function Profile(){
     const searchInfo = useSelector(searchData);
     const socketInfo = useSelector(socketData);
     const proffessionInfo = useSelector(proffessionData);
+    const languageInfo = useSelector(languageData);
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -139,7 +141,7 @@ function Profile(){
                                                 NewChat(userInfo.info.id, searchInfo.info.id, history, dispatch);
                                             }
                                         }}
-                                    >{hasChat ? "Sarakste" : "Sākt saraksti"}</button>
+                                    >{hasChat ? languageInfo.text.profile.chat1 : languageInfo.text.profile.chat2}</button>
                                 )}
                             </div>
                             {isUsersProfile && (
@@ -148,12 +150,12 @@ function Profile(){
                         </div>
 
                         <div className="profile__left__middle">
-                            <ProfileMiddleRow icon={Www} iconAlt="www" title="Mājas lapa" value={searchInfo.info.profile.website_url ? searchInfo.info.profile.website_url : 'Nav'} />
-                            <ProfileMiddleRow icon={People} iconAlt="people" title="darbinieku skaits" value={searchInfo.info.profile.company_size ? searchInfo.info.profile.company_size : 'Nav ievadīts'} />
-                            <ProfileMiddleRow icon={Phone} iconAlt="phone" title="numurs" value={searchInfo.info.profile.phone_number ? searchInfo.info.profile.phone_number : 'Nav'} />
-                            <ProfileMiddleRow icon={EmailIcon} iconAlt="email" title="e-pasts" value={searchInfo.info.email ? searchInfo.info.email : 'Nav'} />
-                            <ProfileMiddleRow icon={marker} iconAlt="marker" title="atrašanās vieta"
-                                value={(!searchInfo.info.profile.city && !searchInfo.info.profile.country) ? 'Nav ievadīta' : 
+                            <ProfileMiddleRow icon={Www} iconAlt="www" title={languageInfo.text.profile.jobGiver.homePage} value={searchInfo.info.profile.website_url ? searchInfo.info.profile.website_url : languageInfo.text.profile.none} />
+                            <ProfileMiddleRow icon={People} iconAlt="people" title={languageInfo.text.profile.jobGiver.employeeCount} value={searchInfo.info.profile.company_size ? searchInfo.info.profile.company_size : languageInfo.text.profile.unknown1} />
+                            <ProfileMiddleRow icon={Phone} iconAlt="phone" title={languageInfo.text.profile.jobGiver.phoneNum} value={searchInfo.info.profile.phone_number ? searchInfo.info.profile.phone_number : languageInfo.text.profile.none} />
+                            <ProfileMiddleRow icon={EmailIcon} iconAlt="email" title={languageInfo.text.profile.jobGiver.email} value={searchInfo.info.email ? searchInfo.info.email : languageInfo.text.profile.none} />
+                            <ProfileMiddleRow icon={marker} iconAlt="marker" title={languageInfo.text.profile.jobGiver.location}
+                                value={(!searchInfo.info.profile.city && !searchInfo.info.profile.country) ? languageInfo.text.profile.unknown2 : 
                                 <>
                                     {(searchInfo.info.profile.country && searchInfo.info.profile.city) ? `${searchInfo.info.profile.country}, ${searchInfo.info.profile.city}` :
                                     <>
@@ -166,9 +168,9 @@ function Profile(){
 
                         <div className="profile__left__bottom">
                             <div className="profile__left__bottom__my-desc">
-                                <p className='profile__left__bottom__my-desc__title'>Informācija par kompāniju</p>
+                                <p className='profile__left__bottom__my-desc__title'>{languageInfo.text.profile.jobGiver.description}</p>
                                 <p className='profile__left__bottom__my-desc__desc'>
-                                    {searchInfo.info.profile.description ? searchInfo.info.profile.description : 'šī kompānija vēl nav uzrakstījusi informāciju'}
+                                    {searchInfo.info.profile.description ? searchInfo.info.profile.description : languageInfo.text.profile.jobGiver.noDescription}
                                 </p>
                             </div>
                         </div>
@@ -177,12 +179,12 @@ function Profile(){
                         <div className="profile__companyRight">
                             {isUsersProfile &&
                                 <div className="profile__companyRight__create-job-button">
-                                    <button onClick={() => history.push('/new/jobOffer')}>Izveidot jaunu darba vakanci</button>
+                                    <button onClick={() => history.push('/new/jobOffer')}>{languageInfo.text.profile.jobGiver.newJobOffer}</button>
                                 </div>
                             }
                             {companyPositions.length > 0 ?
                                 <>
-                                    <h2 className="profile__companyRight__title">Darba Piedāvājumi</h2>
+                                    <h2 className="profile__companyRight__title">{languageInfo.text.profile.jobGiver.jobOffers}</h2>
                                     <div className="profile__companyRight__scroll">
                                         {companyPositions.map((possition, i) => {
                                             return (
@@ -195,7 +197,7 @@ function Profile(){
                                     </div>
                                 </> :
                                 <div className="profile__right__no-details">
-                                    <h3>Šai kompānijai vēl nav darba piedāvājumi</h3>
+                                    <h3>{languageInfo.text.profile.jobGiver.noJobOffers}</h3>
                                     <img src={NoJobOffers} alt="profile" />
                                 </div>
                             }
@@ -219,7 +221,7 @@ function Profile(){
                             </div>
                             <div className="profile__left__top__info">
                                 <div>
-                                    <p>{searchInfo.info.first_name} {searchInfo.info.last_name} <span>{searchInfo.info.profile.is_active_jobseeker && '#ADM'}</span> </p>
+                                    <p>{searchInfo.info.first_name} {searchInfo.info.last_name} <span>{searchInfo.info.profile.is_active_jobseeker && languageInfo.text.profile.jobSeeker.activeJobSeeker}</span> </p>
                                     {searchInfo.info.profile.jobCategory && searchInfo.info.profile.job ? (
                                         <small>{`${searchInfo.info.profile.jobCategory} | ${searchInfo.info.profile.job}`}</small>
                                     ) : searchInfo.info.profile.job && (
@@ -235,7 +237,7 @@ function Profile(){
                                                 NewChat(userInfo.info.id, searchInfo.info.id, history, dispatch);
                                             }
                                         }}
-                                    >{hasChat ? "Sarakste" : "Sākt saraksti"}</button>
+                                    >{hasChat ? languageInfo.text.profile.chat1 : languageInfo.text.profile.chat2}</button>
                                 )}
                             </div>
                             {isUsersProfile && (
@@ -244,9 +246,9 @@ function Profile(){
                         </div>
         
                         <div className="profile__left__middle">
-                            <ProfileMiddleRow icon={calendar} iconAlt="calendar" title="Dzimšanas datums" value={searchInfo.info.profile.birth_date ? searchInfo.info.profile.birth_date : 'Nav ievadīts'} />
-                            <ProfileMiddleRow icon={marker} iconAlt="location" title="Atrašanās vieta"
-                                value={(!searchInfo.info.profile.city && !searchInfo.info.profile.country) ? 'Nav ievadīta' : 
+                            <ProfileMiddleRow icon={calendar} iconAlt="calendar" title={languageInfo.text.profile.jobSeeker.birthDate} value={searchInfo.info.profile.birth_date ? searchInfo.info.profile.birth_date : languageInfo.text.profile.unknown1} />
+                            <ProfileMiddleRow icon={marker} iconAlt="location" title={languageInfo.text.profile.location}
+                                value={(!searchInfo.info.profile.city && !searchInfo.info.profile.country) ? languageInfo.text.profile.unknown2 : 
                                 <>
                                     {(searchInfo.info.profile.country && searchInfo.info.profile.city) ? `${searchInfo.info.profile.country}, ${searchInfo.info.profile.city}` :
                                     <>
@@ -255,13 +257,13 @@ function Profile(){
                                     </>}
                                 </>}
                             />
-                            <ProfileMiddleRow icon={Star} iconAlt="star" title="Sakrātās zvaigznītes" value="0" />
+                            <ProfileMiddleRow icon={Star} iconAlt="star" title={languageInfo.text.profile.jobSeeker.stars} value="0" />
                         </div>
         
                         <div className="profile__left__bottom">
                             <div className="profile__left__bottom__my-desc">
-                                <p className='profile__left__bottom__my-desc__title'>Apraksts par sevi:</p>
-                                <p className='profile__left__bottom__my-desc__desc'>{searchInfo.info.profile.bio ? searchInfo.info.profile.bio : 'Nav'}</p>
+                                <p className='profile__left__bottom__my-desc__title'>{languageInfo.text.profile.jobSeeker.description}</p>
+                                <p className='profile__left__bottom__my-desc__desc'>{searchInfo.info.profile.bio ? searchInfo.info.profile.bio : languageInfo.text.profile.none}</p>
                             </div>
                         </div>
         
@@ -275,7 +277,7 @@ function Profile(){
                             <div className="profile__right">
                                 <section className="profile__right__section">
                                     <div className="profile__right__section__header">
-                                        <p className="profile__right__section__header__title">Izglītība</p>
+                                        <p className="profile__right__section__header__title">{languageInfo.text.profile.jobSeeker.education}</p>
                                         {isUsersProfile && searchInfo.info.profile.knowledge && searchInfo.info.profile.knowledge !== '' &&
                                             <img className='profile__right__section__header__edit' src={editingKnowledge ? CloseIcon : pen} alt="edit" onClick={() => setEditingKnowledge(!editingKnowledge)} />
                                         }
@@ -288,7 +290,7 @@ function Profile(){
                                                     onChange={(e) => setEditKnowledge(e.target.value)}
                                                     type="text"
                                                 ></textarea>
-                                                <button onClick={(e) => {updateKnowledgeJobExtra(e, userInfo.info.id, editKnowledge, editLastJob, editExtraSkills, dispatch, userInfo.accessToken);setEditingKnowledge(false)}}>Saglabāt</button>
+                                                <button onClick={(e) => {updateKnowledgeJobExtra(e, userInfo.info.id, editKnowledge, editLastJob, editExtraSkills, dispatch, userInfo.accessToken);setEditingKnowledge(false)}}>{languageInfo.text.profile.jobSeeker.save}</button>
                                             </form>
                                         ) : (
                                             <p>{searchInfo.info.profile.knowledge}</p>
@@ -297,7 +299,7 @@ function Profile(){
                                 </section>
                                 <section className="profile__right__section">
                                     <div className="profile__right__section__header">
-                                        <p className="profile__right__section__header__title">{userInfo.info.profile.is_active_jobseeker ? "Pēdējais amats" : "Esošais amats"}</p>
+                                        <p className="profile__right__section__header__title">{userInfo.info.profile.is_active_jobseeker ? languageInfo.text.profile.jobSeeker.previousJob : languageInfo.text.profile.jobSeeker.currentJob}</p>
                                         {isUsersProfile && searchInfo.info.profile.experience && searchInfo.info.profile.experience !== '' &&
                                             <img className='profile__right__section__header__edit' src={editingLastJob ? CloseIcon : pen} alt="edit" onClick={() => setEditingLastJob(!editingLastJob)} />
                                         }
@@ -310,7 +312,7 @@ function Profile(){
                                                     onChange={(e) => setEditLastJob(e.target.value)}
                                                     type="text"
                                                 ></textarea>
-                                                <button onClick={(e) => {updateKnowledgeJobExtra(e, userInfo.info.id, editKnowledge, editLastJob, editExtraSkills, dispatch, userInfo.accessToken);setEditingLastJob(false)}}>Saglabāt</button>
+                                                <button onClick={(e) => {updateKnowledgeJobExtra(e, userInfo.info.id, editKnowledge, editLastJob, editExtraSkills, dispatch, userInfo.accessToken);setEditingLastJob(false)}}>{languageInfo.text.profile.jobSeeker.save}</button>
                                             </form>
                                         ) : (
                                             <p>{searchInfo.info.profile.experience}</p>
@@ -319,7 +321,7 @@ function Profile(){
                                 </section>
                                 <section className="profile__right__section">
                                     <div className="profile__right__section__header">
-                                        <p className="profile__right__section__header__title">Papildus prasmes</p>
+                                        <p className="profile__right__section__header__title">{languageInfo.text.profile.jobSeeker.extraSkills}</p>
                                         {isUsersProfile && searchInfo.info.profile.extra && searchInfo.info.profile.extra !== '' &&
                                             <img className='profile__right__section__header__edit' src={editingExtraSkills ? CloseIcon : pen} alt="edit" onClick={() => setEditingExtraSkills(!editingExtraSkills)} />
                                         }
@@ -332,7 +334,7 @@ function Profile(){
                                                     onChange={(e) => setEditExtraSkills(e.target.value)}
                                                     type="text"
                                                 ></textarea>
-                                                <button onClick={(e) => {updateKnowledgeJobExtra(e, userInfo.info.id, editKnowledge, editLastJob, editExtraSkills, dispatch, userInfo.accessToken);setEditingExtraSkills(false)}}>Saglabāt</button>
+                                                <button onClick={(e) => {updateKnowledgeJobExtra(e, userInfo.info.id, editKnowledge, editLastJob, editExtraSkills, dispatch, userInfo.accessToken);setEditingExtraSkills(false)}}>{languageInfo.text.profile.jobSeeker.save}</button>
                                             </form>
                                         ) : (
                                             <p>{searchInfo.info.profile.extra}</p>
@@ -343,7 +345,7 @@ function Profile(){
                         ) : (
                             <div className="profile__right">
                                 <div className="profile__right__no-details">
-                                    <h3>Šis lietotājs nav pabeidzis veidot savu profilu</h3>
+                                    <h3>{languageInfo.text.profile.jobSeeker.noEntries}</h3>
                                     <img src={ProfileNotComplete} alt="profile" />
                                 </div>
                             </div>

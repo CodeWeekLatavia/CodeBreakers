@@ -119,10 +119,11 @@
 
 .settings {
     button {
-        width: 180px;
-        height: 40px;
+        min-width: 180px;
+        min-height: 40px;
         border-radius: 5px;
         margin: .5rem;
+        padding: .5rem;
         font-size: 18px;
         font-family: 'Hammersmith One';
 

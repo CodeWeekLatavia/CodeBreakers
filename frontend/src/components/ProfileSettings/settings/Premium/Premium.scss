@@ -45,3 +45,16 @@
         }
     }
 }
+
+@media (max-width: 425px) {
+    .settings {
+        &__premium {
+            &__status {
+                flex-direction: column;
+                &__wrapper {
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
